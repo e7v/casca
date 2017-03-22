@@ -4,7 +4,7 @@
 This is casca, a Python IRC bot. Originally written by Sean B. Palmer, it has
 been ported to Python3.
 
-This version comes with many new modules, IPv6 support, TLS support, and unit
+This version comes with many new modules, SASL support, IPv6 support, TLS support, and unit
 tests.
 
 Compatibility with existing casca modules has been mostly retained, but they
