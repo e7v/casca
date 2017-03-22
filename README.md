@@ -1,13 +1,13 @@
-# phenny
-[![Build Status](https://travis-ci.org/mutantmonkey/phenny.png?branch=master)](https://travis-ci.org/mutantmonkey/phenny)
+# casca
+[![Build Status](https://travis-ci.org/mutantmonkey/casca.png?branch=master)](https://travis-ci.org/mutantmonkey/casca)
 
-This is phenny, a Python IRC bot. Originally written by Sean B. Palmer, it has
+This is casca, a Python IRC bot. Originally written by Sean B. Palmer, it has
 been ported to Python3.
 
 This version comes with many new modules, IPv6 support, TLS support, and unit
 tests.
 
-Compatibility with existing phenny modules has been mostly retained, but they
+Compatibility with existing casca modules has been mostly retained, but they
 will need to be updated to run on Python3 if they do not already. All of the
 core modules have been ported, removed, or replaced.
 
@@ -16,9 +16,9 @@ core modules have been ported, removed, or replaced.
 * [python-requests](http://docs.python-requests.org/en/latest/)
 
 ## Installation
-1. Run `./phenny` - this creates a default config file
-2. Edit `~/.phenny/default.py`
-3. Run `./phenny` - this now runs phenny with your settings
+1. Run `./casca` - this creates a default config file
+2. Edit `~/.casca/default.py`
+3. Run `./casca` - this now runs casca with your settings
 
 Enjoy!
 

@@ -8,12 +8,12 @@ from tools import GrumbleError
 import web
 import lxml.html
 
-def rule34(phenny, input):
+def rule34(casca, input):
     """.rule34 <query> - Rule 34: If it exists there is porn of it."""
 
     q = input.group(2)
     if not q:
-        phenny.say(rule34.__doc__.strip())
+        casca.say(rule34.__doc__.strip())
         return
 
     try:
@@ -25,7 +25,7 @@ def rule34(phenny, input):
     doc.make_links_absolute('http://rule34.xxx/')
     thumbs = doc.find_class('thumb')
     if len(thumbs) <= 0:
-        phenny.reply("You just broke Rule 34! Better start uploading...")
+        casca.reply("You just broke Rule 34! Better start uploading...")
         return
 
     try:
@@ -34,7 +34,7 @@ def rule34(phenny, input):
         raise GrumbleError("THE INTERNET IS FUCKING BROKEN. Please try again later.")
 
     response = '!!NSFW!! -> {0} <- !!NSFW!!'.format(link)
-    phenny.reply(response)
+    casca.reply(response)
 rule34.rule = (['rule34'], r'(.*)')
 
 if __name__ == '__main__':

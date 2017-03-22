@@ -4,7 +4,7 @@ clock.py - Phenny Clock Module
 Copyright 2008-9, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://inamidst.com/phenny/
+http://inamidst.com/casca/
 """
 
 import re
@@ -200,13 +200,13 @@ TimeZones.update(TZ3)
 
 r_local = re.compile(r'\([a-z]+_[A-Z]+\)')
 
-def f_time(phenny, input): 
+def f_time(casca, input): 
     """Returns the current time."""
     tz = input.group(2) or 'GMT'
 
     # Personal time zones, because they're rad
-    if hasattr(phenny.config, 'timezones'): 
-        People = phenny.config.timezones
+    if hasattr(casca.config, 'timezones'): 
+        People = casca.config.timezones
     else: People = {}
 
     if tz in People: 
@@ -219,20 +219,20 @@ def f_time(phenny, input):
 
     if (TZ == 'UTC') or (TZ == 'Z'): 
         msg = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
-        phenny.reply(msg)
+        casca.reply(msg)
     elif r_local.match(tz): # thanks to Mark Shoulsdon (clsn)
         locale.setlocale(locale.LC_TIME, (tz[1:-1], 'UTF-8'))
         msg = time.strftime("%A, %d %B %Y %H:%M:%SZ", time.gmtime())
-        phenny.reply(msg)
+        casca.reply(msg)
     elif TZ in TimeZones: 
         offset = TimeZones[TZ] * 3600
         timenow = time.gmtime(time.time() + offset)
         msg = time.strftime("%a, %d %b %Y %H:%M:%S " + str(TZ), timenow)
-        phenny.reply(msg)
+        casca.reply(msg)
     elif tz and tz[0] in ('+', '-') and 4 <= len(tz) <= 6: 
         timenow = time.gmtime(time.time() + (int(tz[:3]) * 3600))
         msg = time.strftime("%a, %d %b %Y %H:%M:%S " + str(tz), timenow)
-        phenny.reply(msg)
+        casca.reply(msg)
     else: 
         try: t = float(tz)
         except ValueError: 
@@ -241,50 +241,50 @@ def f_time(phenny, input):
             if r_tz.match(tz) and os.path.isfile('/usr/share/zoneinfo/' + tz): 
                 cmd, PIPE = 'TZ=%s date' % tz, subprocess.PIPE
                 proc = subprocess.Popen(cmd, shell=True, stdout=PIPE)
-                phenny.reply(proc.communicate()[0])
+                casca.reply(proc.communicate()[0])
             else: 
                 error = "Sorry, I don't know about the '%s' timezone." % tz
-                phenny.reply(error)
+                casca.reply(error)
         else: 
             timenow = time.gmtime(time.time() + (t * 3600))
             msg = time.strftime("%a, %d %b %Y %H:%M:%S " + str(tz), timenow)
-            phenny.reply(msg)
+            casca.reply(msg)
 f_time.name = 'time'
 f_time.commands = ['time']
 f_time.example = '.time UTC'
 
-def beats(phenny, input): 
+def beats(casca, input): 
     """Shows the internet time in Swatch beats."""
     beats = ((time.time() + 3600) % 86400) / 86.4
     beats = int(math.floor(beats))
-    phenny.say('@%03i' % beats)
+    casca.say('@%03i' % beats)
 beats.commands = ['beats']
 beats.priority = 'low'
 
 def divide(input, by): 
     return (input // by), (input % by)
 
-def yi(phenny, input): 
+def yi(casca, input): 
     """Shows whether it is currently yi or not."""
     quadraels, remainder = divide(int(time.time()), 1753200)
     raels = quadraels * 4
     extraraels, remainder = divide(remainder, 432000)
     if extraraels == 4: 
-        return phenny.say('Yes! PARTAI!')
+        return casca.say('Yes! PARTAI!')
     elif extraraels == 3:
-    	  return phenny.say('Soon...')
-    else: phenny.say('Not yet...')
+    	  return casca.say('Soon...')
+    else: casca.say('Not yet...')
 yi.commands = ['yi']
 yi.priority = 'low'
 
-def tock(phenny, input): 
+def tock(casca, input): 
     """Shows the time from the USNO's atomic clock."""
     info = web.head('http://tycho.usno.navy.mil/cgi-bin/timer.pl')
-    phenny.say('"' + info['Date'] + '" - tycho.usno.navy.mil')
+    casca.say('"' + info['Date'] + '" - tycho.usno.navy.mil')
 tock.commands = ['tock']
 tock.priority = 'high'
 
-def npl(phenny, input): 
+def npl(casca, input): 
     """Shows the time from NPL's SNTP server."""
     # for server in ('ntp1.npl.co.uk', 'ntp2.npl.co.uk'): 
     client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -299,8 +299,8 @@ def npl(phenny, input):
         a, b = str(d).split('.')
         f = '%Y-%m-%d %H:%M:%S'
         result = datetime.datetime.fromtimestamp(d).strftime(f) + '.' + b[:6]
-        phenny.say(result + ' - ntp1.npl.co.uk')
-    else: phenny.say('No data received, sorry')
+        casca.say(result + ' - ntp1.npl.co.uk')
+    else: casca.say('No data received, sorry')
 npl.commands = ['npl']
 npl.priority = 'high'
 

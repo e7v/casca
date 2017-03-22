@@ -10,20 +10,20 @@ import requests
 import json
 
 
-def linx(phenny, input, short=False):
+def linx(casca, input, short=False):
     """.linx <url> - Upload a remote URL to linx.li."""
 
     url = input.group(2)
     if not url:
-        phenny.reply("No URL provided")
+        casca.reply("No URL provided")
         return
 
     try:
         r = requests.get("https://linx.vtluug.org/upload?", params={"url": url}, headers={"Accept": "application/json"})
         if "url" in r.json():
-            phenny.reply(r.json()["url"])
+            casca.reply(r.json()["url"])
         else:
-            phenny.reply(r.json()["error"])
+            casca.reply(r.json()["error"])
 
     except Exception as exc: 
         raise GrumbleError(exc)

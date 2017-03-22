@@ -16,12 +16,12 @@ def sloganize(word):
     bytes = web.get(uri % web.quote(word))
     return bytes
 
-def slogan(phenny, input): 
+def slogan(casca, input): 
     """.slogan <term> - Come up with a slogan for a term."""
 
     word = input.group(2)
     if word is None:
-        phenny.say("You need to specify a word; try .slogan Granola")
+        casca.say("You need to specify a word; try .slogan Granola")
         return
     
     word = word.strip()
@@ -33,7 +33,7 @@ def slogan(phenny, input):
     
     if not slogan:
         raise GrumbleError("Looks like an issue with sloganizer.net")
-    phenny.say(slogan)
+    casca.say(slogan)
 slogan.commands = ['slogan']
 slogan.example = '.slogan Granola'
 

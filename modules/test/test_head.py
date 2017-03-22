@@ -10,51 +10,51 @@ from modules.head import head, snarfuri
 
 class TestHead(unittest.TestCase):
     def setUp(self):
-        self.phenny = MagicMock()
+        self.casca = MagicMock()
 
     def test_head(self):
         input = Mock(group=lambda x: 'https://vtluug.org')
-        head(self.phenny, input)
+        head(self.casca, input)
 
-        out = self.phenny.reply.call_args[0][0]
+        out = self.casca.reply.call_args[0][0]
         m = re.match('^200, text/html, utf-8, \d{4}\-\d{2}\-\d{2} '\
                 '\d{2}:\d{2}:\d{2} UTC, [0-9]+ bytes, [0-9]+.[0-9]+ s$', out, flags=re.UNICODE)
         self.assertTrue(m)
 
     def test_head_404(self):
         input = Mock(group=lambda x: 'https://vtluug.org/trigger_404')
-        head(self.phenny, input)
+        head(self.casca, input)
 
-        out = self.phenny.say.call_args[0][0]
+        out = self.casca.say.call_args[0][0]
         self.assertEqual(out, '404')
 
     def test_header(self):
         input = Mock(group=lambda x: 'https://vtluug.org Server')
-        head(self.phenny, input)
+        head(self.casca, input)
 
-        self.phenny.say.assert_called_once_with("Server: nginx")
+        self.casca.say.assert_called_once_with("Server: nginx")
 
     def test_header_bad(self):
         input = Mock(group=lambda x: 'https://vtluug.org truncatedcone')
-        head(self.phenny, input)
+        head(self.casca, input)
 
-        self.phenny.say.assert_called_once_with("There was no truncatedcone "\
+        self.casca.say.assert_called_once_with("There was no truncatedcone "\
                 "header in the response.")
 
     def test_snarfuri(self):
-        self.phenny.config.prefix = '.'
-        self.phenny.config.linx_api_key = ""
+        self.casca.config.prefix = '.'
+        self.casca.config.linx_api_key = ""
         input = Mock(group=lambda x=0: 'https://www.google.com',
-                sender='#phenny')
-        snarfuri(self.phenny, input)
+                sender='#casca')
+        snarfuri(self.casca, input)
 
-        self.phenny.msg.assert_called_once_with('#phenny', "[ Google ]")
+        self.casca.msg.assert_called_once_with('#casca', "[ Google ]")
 
     def test_snarfuri_405(self):
-        self.phenny.config.prefix = '.'
-        self.phenny.config.linx_api_key = ""
+        self.casca.config.prefix = '.'
+        self.casca.config.linx_api_key = ""
         input = Mock(group=lambda x=0: 'http://ozuma.sakura.ne.jp/httpstatus/405',
-                sender='#phenny')
-        snarfuri(self.phenny, input)
+                sender='#casca')
+        snarfuri(self.casca, input)
 
-        self.assertEqual(self.phenny.msg.called, False)
+        self.assertEqual(self.casca.msg.called, False)

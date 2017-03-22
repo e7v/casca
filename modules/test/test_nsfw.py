@@ -11,16 +11,16 @@ from modules.nsfw import nsfw
 
 class TestNsfw(unittest.TestCase):
     def setUp(self):
-        self.phenny = MagicMock()
+        self.casca = MagicMock()
 
     def test_nsfw(self):
         input = Mock(group=lambda x: "test")
-        nsfw(self.phenny, input)
-        self.phenny.say.assert_called_once_with(
+        nsfw(self.casca, input)
+        self.casca.say.assert_called_once_with(
             "!!NSFW!! -> test <- !!NSFW!!")
 
     def test_nsfw_none(self):
         input = Mock(group=lambda x: None)
-        nsfw(self.phenny, input)
-        self.phenny.say.assert_called_once_with(
+        nsfw(self.casca, input)
+        self.casca.say.assert_called_once_with(
             ".nsfw <link> - for when a link isn't safe for work")

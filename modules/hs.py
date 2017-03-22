@@ -40,7 +40,7 @@ def search(query):
 
     return ret
 
-def hs(phenny, input):
+def hs(casca, input):
     """.hs <pid/name/email> - Search for someone on Virginia Tech People Search."""
 
     q = input.group(2)
@@ -52,13 +52,13 @@ def hs(phenny, input):
     s = search(q)
     if s:
         if len(s) >1:
-            phenny.reply("Multiple results found; try {0}".format(results))
+            casca.reply("Multiple results found; try {0}".format(results))
         else:
             for entry in s:
                 person = PERSON_URL.format(int(entry['uid']))
-                phenny.reply("{0} - {1}".format(entry['cn'], person))
+                casca.reply("{0} - {1}".format(entry['cn'], person))
     else:
-        phenny.reply("No results found")
+        casca.reply("No results found")
 hs.rule = (['hs'], r'(.*)')
 
 if __name__ == '__main__':

@@ -8,7 +8,7 @@ import web
 from tools import GrumbleError
 
 
-def commit(phenny, input):
+def commit(casca, input):
     """.commit - Get a What the Commit commit message."""
 
     try:
@@ -16,7 +16,7 @@ def commit(phenny, input):
     except:
         raise GrumbleError("THE INTERNET IS FUCKING BROKEN. Please try again later.")
 
-    phenny.reply(msg)
+    casca.reply(msg)
 commit.commands = ['commit']
 
 if __name__ == '__main__':

@@ -10,7 +10,7 @@ import web
 import lxml.html
 
 
-def fml(phenny, input):
+def fml(casca, input):
     """.fml - Grab something from fmylife.com."""
     try:
         req = web.get("http://www.fmylife.com/random")
@@ -19,7 +19,7 @@ def fml(phenny, input):
 
     doc = lxml.html.fromstring(req)
     quote = doc.find_class('block')[1][0].text_content()
-    phenny.say(quote)
+    casca.say(quote)
 fml.commands = ['fml']
 
 

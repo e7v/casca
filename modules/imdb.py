@@ -4,7 +4,7 @@ imdb.py - Phenny Web Search Module
 Copyright 2012, Randy Nance, randynance.info 
 Licensed under the Eiffel Forum License 2.
 
-http://inamidst.com/phenny/
+http://inamidst.com/casca/
 """
 
 import re
@@ -30,21 +30,21 @@ def imdb_search(query):
     return info
 
 
-def imdb(phenny, input): 
+def imdb(casca, input): 
     """.imdb <movie> - Find a link to a movie on IMDb."""
 
     query = input.group(2)
     if not query:
-        return phenny.say('.imdb what?')
+        return casca.say('.imdb what?')
 
     m = imdb_search(query)
     if m:
-        phenny.say('{0} ({1}): {2}  http://imdb.com/title/{3}'.format(
+        casca.say('{0} ({1}): {2}  http://imdb.com/title/{3}'.format(
             m['Title'],
             m['Year'],
             m['Plot'],
             m['imdbID']))
     else:
-        phenny.reply("No results found for '%s'." % query)
+        casca.reply("No results found for '%s'." % query)
 imdb.commands = ['imdb']
 imdb.example = '.imdb Promethius'

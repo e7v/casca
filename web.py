@@ -2,7 +2,7 @@
 """
 web.py - Web Facilities
 Author: Sean B. Palmer, inamidst.com
-About: http://inamidst.com/phenny/
+About: http://inamidst.com/casca/
 """
 
 import re

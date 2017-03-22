@@ -11,13 +11,13 @@ from modules import archwiki
 
 class TestArchwiki(unittest.TestCase):
     def setUp(self):
-        self.phenny = MagicMock()
+        self.casca = MagicMock()
 
     def test_awik(self):
         input = Mock(groups=lambda: ['', "KVM"])
-        archwiki.awik(self.phenny, input)
+        archwiki.awik(self.casca, input)
 
-        out = self.phenny.say.call_args[0][0]
+        out = self.casca.say.call_args[0][0]
         m = re.match('^.* - https:\/\/wiki\.archlinux\.org\/index\.php\/KVM$',
                 out, flags=re.UNICODE)
         self.assertTrue(m)
@@ -25,15 +25,15 @@ class TestArchwiki(unittest.TestCase):
     def test_awik_invalid(self):
         term = "KVM#Enabling_KSM"
         input = Mock(groups=lambda: ['', term])
-        archwiki.awik(self.phenny, input)
+        archwiki.awik(self.casca, input)
 
-        self.phenny.say.assert_called_once_with( "Can't find anything in "\
+        self.casca.say.assert_called_once_with( "Can't find anything in "\
                 "the ArchWiki for \"{0}\".".format(term))
 
     def test_awik_none(self):
         term = "Ajgoajh"
         input = Mock(groups=lambda: ['', term])
-        archwiki.awik(self.phenny, input)
+        archwiki.awik(self.casca, input)
 
-        self.phenny.say.assert_called_once_with( "Can't find anything in "\
+        self.casca.say.assert_called_once_with( "Can't find anything in "\
                 "the ArchWiki for \"{0}\".".format(term))

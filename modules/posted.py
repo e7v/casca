@@ -10,7 +10,7 @@ from ago import human
 
 def setup(self):
     fn = self.nick + '-' + self.config.host + '.posted.db'
-    self.posted_db = os.path.join(os.path.expanduser('~/.phenny'), fn)
+    self.posted_db = os.path.join(os.path.expanduser('~/.casca'), fn)
     conn = sqlite3.connect(self.posted_db)
 
     c = conn.cursor()
@@ -25,9 +25,9 @@ def setup(self):
     conn.close()
 
 
-def check_posted(phenny, input, url):
+def check_posted(casca, input, url):
     if url:
-        conn = sqlite3.connect(phenny.posted_db, 
+        conn = sqlite3.connect(casca.posted_db, 
             detect_types=sqlite3.PARSE_DECLTYPES)
         c = conn.cursor()
         c.execute("SELECT nick, time FROM posted WHERE channel=? AND url=?", 
@@ -53,17 +53,17 @@ def check_posted(phenny, input, url):
         return posted
 
 
-def posted(phenny, input):
+def posted(casca, input):
     if not input.group(2):
-        return phenny.say(".posted <URL> - checks if URL has been posted"
+        return casca.say(".posted <URL> - checks if URL has been posted"
         + " before in this channel.")
     url = input.group(2)
 
-    posted = check_posted(phenny, input, url)
+    posted = check_posted(casca, input, url)
     if posted:
-        phenny.reply("URL was posted {0}".format(posted))
+        casca.reply("URL was posted {0}".format(posted))
     else:
-        phenny.reply("I don't remember seeing this URL in this channel.")
+        casca.reply("I don't remember seeing this URL in this channel.")
 
 posted.thread = False
 posted.commands = ["posted"]

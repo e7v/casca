@@ -1,5 +1,5 @@
 """
-Tests for phenny's irc.py
+Tests for casca's irc.py
 """
 
 import unittest
@@ -18,13 +18,13 @@ class OriginTest(unittest.TestCase):
 
     def test_privmsg(self):
         source = "Foobar!foo@bar.example.com"
-        args = ['PRIVMSG', '#phenny']
+        args = ['PRIVMSG', '#casca']
         origin = irc.Origin(self.bot, source, args)
 
         self.assertEqual(origin.nick, 'Foobar')
         self.assertEqual(origin.user, 'foo')
         self.assertEqual(origin.host, 'bar.example.com')
-        self.assertEqual(origin.sender, '#phenny')
+        self.assertEqual(origin.sender, '#casca')
 
 
 class BotTest(unittest.TestCase):
@@ -33,7 +33,7 @@ class BotTest(unittest.TestCase):
     def setUp(self, mock_async, mock_thread):
         self.nick = 'foo'
         self.name = 'Phenny'
-        self.bot = irc.Bot(self.nick, self.name, '#phenny')
+        self.bot = irc.Bot(self.nick, self.name, '#casca')
 
     @patch('irc.Bot.write')
     def test_login(self, mock_write):
@@ -54,21 +54,21 @@ class BotTest(unittest.TestCase):
 
     @patch('irc.Bot.push')
     def test_msg(self, mock_push):
-        self.bot.msg('#phenny', 'hi')
+        self.bot.msg('#casca', 'hi')
 
-        mock_push.assert_called_once_with(b'PRIVMSG #phenny :hi\r\n')
+        mock_push.assert_called_once_with(b'PRIVMSG #casca :hi\r\n')
 
     @patch('time.sleep') # patch sleep so test runs faster
     @patch('irc.Bot.push')
     def test_msgflood(self, mock_push, mock_sleep):
-        self.bot.msg('#phenny', 'flood')
-        self.bot.msg('#phenny', 'flood')
-        self.bot.msg('#phenny', 'flood')
-        self.bot.msg('#phenny', 'flood')
-        self.bot.msg('#phenny', 'flood')
-        self.bot.msg('#phenny', 'flood')
+        self.bot.msg('#casca', 'flood')
+        self.bot.msg('#casca', 'flood')
+        self.bot.msg('#casca', 'flood')
+        self.bot.msg('#casca', 'flood')
+        self.bot.msg('#casca', 'flood')
+        self.bot.msg('#casca', 'flood')
 
-        mock_push.assert_called_with(b'PRIVMSG #phenny :...\r\n')
+        mock_push.assert_called_with(b'PRIVMSG #casca :...\r\n')
         self.assertEqual(mock_sleep.call_count, 5)
 
     @patch('irc.Bot.msg')

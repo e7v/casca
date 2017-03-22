@@ -4,7 +4,7 @@ tools.py - Phenny Tools
 Copyright 2008, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://inamidst.com/phenny/
+http://inamidst.com/casca/
 """
 
 
@@ -13,8 +13,8 @@ class GrumbleError(Exception):
 
 
 def deprecated(old): 
-    def new(phenny, input, old=old): 
-        self = phenny
+    def new(casca, input, old=old): 
+        self = casca
         origin = type('Origin', (object,), {
             'sender': input.sender, 
             'nick': input.nick

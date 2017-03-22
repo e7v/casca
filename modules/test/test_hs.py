@@ -11,7 +11,7 @@ from modules.hs import search, hs
 
 class TestHs(unittest.TestCase):
     def setUp(self):
-        self.phenny = MagicMock()
+        self.casca = MagicMock()
 
     def test_search(self):
         data = search('john')
@@ -22,34 +22,34 @@ class TestHs(unittest.TestCase):
 
     def test_single(self):
         input = Mock(group=lambda x: 'marchany')
-        hs(self.phenny, input)
+        hs(self.casca, input)
 
         pattern = re.compile(
             '^.* - http://search\.vt\.edu/search/person\.html\?person=\d+$',
             flags=re.UNICODE)
-        out = self.phenny.reply.call_args[0][0]
+        out = self.casca.reply.call_args[0][0]
         self.assertRegex(out, pattern)
 
     def test_multi(self):
         input = Mock(group=lambda x: 'john')
-        hs(self.phenny, input)
+        hs(self.casca, input)
 
         pattern = re.compile(
             '^Multiple results found; try http://search\.vt\.edu/search/people\.html\?q=.*$',
             flags=re.UNICODE)
-        out = self.phenny.reply.call_args[0][0]
+        out = self.casca.reply.call_args[0][0]
         self.assertRegex(out, pattern)
 
     def test_2char(self):
         input = Mock(group=lambda x: 'hs')
-        hs(self.phenny, input)
+        hs(self.casca, input)
 
-        out = self.phenny.reply.call_args[0][0]
-        self.phenny.reply.assert_called_once_with("No results found")
+        out = self.casca.reply.call_args[0][0]
+        self.casca.reply.assert_called_once_with("No results found")
 
     def test_none(self):
         input = Mock(group=lambda x: 'THIS_IS_NOT_A_REAL_SEARCH_QUERY')
-        hs(self.phenny, input)
+        hs(self.casca, input)
 
-        out = self.phenny.reply.call_args[0][0]
-        self.phenny.reply.assert_called_once_with("No results found")
+        out = self.casca.reply.call_args[0][0]
+        self.casca.reply.assert_called_once_with("No results found")

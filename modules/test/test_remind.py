@@ -14,25 +14,25 @@ from modules import remind
 
 class TestRemind(unittest.TestCase):
     def setUp(self):
-        self.phenny = MagicMock()
-        self.phenny.nick = 'phenny'
-        self.phenny.config.host = 'test-phenny.example.com'
+        self.casca = MagicMock()
+        self.casca.nick = 'casca'
+        self.casca.config.host = 'test-casca.example.com'
 
         remind.load_database = lambda name: {}
         remind.dump_database = lambda name, data: name
-        remind.setup(self.phenny)
+        remind.setup(self.casca)
 
     def test_remind(self):
         secs = 5
         input = Mock(sender='#testsworth', nick='Testsworth',
                 bytes='.in {0} seconds TEST REMIND'.format(secs))
 
-        remind.remind(self.phenny, input)
-        self.phenny.reply.assert_called_once_with("Okay, will remind in {0}"\
+        remind.remind(self.casca, input)
+        self.casca.reply.assert_called_once_with("Okay, will remind in {0}"\
                 " secs".format(secs))
 
         time.sleep(secs + 1)
-        self.phenny.msg.assert_called_once_with(input.sender,
+        self.casca.msg.assert_called_once_with(input.sender,
                 input.nick + ': TEST REMIND')
 
     def test_remind_nomsg(self):
@@ -40,10 +40,10 @@ class TestRemind(unittest.TestCase):
         input = Mock(sender='#testsworth', nick='Testsworth',
                 bytes='.in {0} seconds'.format(secs))
 
-        remind.remind(self.phenny, input)
-        self.phenny.reply.assert_called_once_with("Okay, will remind in {0}"\
+        remind.remind(self.casca, input)
+        self.casca.reply.assert_called_once_with("Okay, will remind in {0}"\
                 " secs".format(secs))
 
         time.sleep(secs + 1)
-        self.phenny.msg.assert_called_once_with(input.sender,
+        self.casca.msg.assert_called_once_with(input.sender,
                 input.nick + '!')

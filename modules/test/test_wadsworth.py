@@ -11,11 +11,11 @@ from modules.wadsworth import wadsworth
 
 class TestWadsworth(unittest.TestCase):
     def setUp(self):
-        self.phenny = MagicMock()
+        self.casca = MagicMock()
 
     def test_wadsworth(self):
         input = Mock(group=lambda x: "Apply Wadsworth's Constant to a string")
-        wadsworth(self.phenny, input)
+        wadsworth(self.casca, input)
 
-        self.phenny.say.assert_called_once_with(
+        self.casca.say.assert_called_once_with(
                 "Constant to a string")

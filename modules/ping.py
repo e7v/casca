@@ -2,19 +2,19 @@
 """
 ping.py - Phenny Ping Module
 Author: Sean B. Palmer, inamidst.com
-About: http://inamidst.com/phenny/
+About: http://inamidst.com/casca/
 """
 
 import random
 
-def hello(phenny, input): 
+def hello(casca, input): 
     greeting = random.choice(('Hi', 'Hey', 'Hello'))
     punctuation = random.choice(('', '!'))
-    phenny.say(greeting + ' ' + input.nick + punctuation)
+    casca.say(greeting + ' ' + input.nick + punctuation)
 hello.rule = r'(?i)(hi|hello|hey) $nickname[ \t]*$'
 
-def interjection(phenny, input): 
-    phenny.say(input.nick + '!')
+def interjection(casca, input): 
+    casca.say(input.nick + '!')
 interjection.rule = r'$nickname!'
 interjection.priority = 'high'
 interjection.thread = False

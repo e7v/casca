@@ -10,12 +10,12 @@ from modules.wuvt import wuvt
 
 class TestWuvt(unittest.TestCase):
     def setUp(self):
-        self.phenny = MagicMock()
+        self.casca = MagicMock()
 
     def test_wuvt(self):
-        wuvt(self.phenny, None)
+        wuvt(self.casca, None)
 
-        out = self.phenny.say.call_args[0][0]
+        out = self.casca.say.call_args[0][0]
         m = re.match('^.* is currently playing .* by .*$', out,
                 flags=re.UNICODE)
         self.assertTrue(m)

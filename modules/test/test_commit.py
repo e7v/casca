@@ -10,8 +10,8 @@ from modules.commit import commit
 
 class TestCommit(unittest.TestCase):
     def setUp(self):
-        self.phenny = MagicMock()
+        self.casca = MagicMock()
 
     def test_commit(self):
-        commit(self.phenny, None)
-        assert self.phenny.reply.called is True
+        commit(self.casca, None)
+        assert self.casca.reply.called is True

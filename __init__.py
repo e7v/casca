@@ -4,7 +4,7 @@ __init__.py - Phenny Init Module
 Copyright 2008, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://inamidst.com/phenny/
+http://inamidst.com/casca/
 """
 
 import sys, os, time, threading, signal
@@ -31,7 +31,7 @@ class Watcher(object):
         self.kill()
         sys.exit()
 
-def run_phenny(config): 
+def run_casca(config): 
     if hasattr(config, 'delay'): 
         delay = config.delay
     else: delay = 20
@@ -59,7 +59,7 @@ def run_phenny(config):
         time.sleep(delay)
 
 def run(config): 
-    t = threading.Thread(target=run_phenny, args=(config,))
+    t = threading.Thread(target=run_casca, args=(config,))
     if hasattr(t, 'run'):
         t.run()
     else: t.start()

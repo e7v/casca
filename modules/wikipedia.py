@@ -4,7 +4,7 @@ wikipedia.py - Phenny Wikipedia Module
 Copyright 2008-9, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://inamidst.com/phenny/
+http://inamidst.com/casca/
 """
 
 import re
@@ -16,12 +16,12 @@ wikiuri = 'https://en.wikipedia.org/wiki/{0}'
 wikisearch = 'https://en.wikipedia.org/wiki/Special:Search?' \
                           + 'search={0}&fulltext=Search'
 
-def wik(phenny, input): 
+def wik(casca, input): 
     """.wik <term> - Look up something on Wikipedia."""
 
     origterm = input.groups()[1]
     if not origterm: 
-        return phenny.say('Perhaps you meant ".wik Zen"?')
+        return casca.say('Perhaps you meant ".wik Zen"?')
 
     term = web.unquote(origterm)
     term = term[0].upper() + term[1:]
@@ -33,12 +33,12 @@ def wik(phenny, input):
         result = w.search(term)
     except web.ConnectionError:
         error = "Can't connect to en.wikipedia.org ({0})".format(wikiuri.format(term))
-        return phenny.say(error)
+        return casca.say(error)
 
     if result is not None: 
-        phenny.say(result)
+        casca.say(result)
     else:
-        phenny.say('Can\'t find anything in Wikipedia for "{0}".'.format(origterm))
+        casca.say('Can\'t find anything in Wikipedia for "{0}".'.format(origterm))
 
 wik.commands = ['wik']
 wik.priority = 'high'

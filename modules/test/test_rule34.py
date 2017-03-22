@@ -11,19 +11,19 @@ from modules.rule34 import rule34
 
 class TestRule34(unittest.TestCase):
     def setUp(self):
-        self.phenny = MagicMock()
+        self.casca = MagicMock()
 
     def test_result(self):
         input = Mock(group=lambda x: 'python')
-        rule34(self.phenny, input)
+        rule34(self.casca, input)
 
-        out = self.phenny.reply.call_args[0][0]
+        out = self.casca.reply.call_args[0][0]
         m = re.match('^!!NSFW!! -> http://rule34\.xxx/.* <- !!NSFW!!$', out,
                 flags=re.UNICODE)
         self.assertTrue(m)
     def test_none(self):
         input = Mock(group=lambda x: '__no_results_for_this__')
-        rule34(self.phenny, input)
+        rule34(self.casca, input)
 
-        self.phenny.reply.assert_called_once_with(
+        self.casca.reply.assert_called_once_with(
                 "You just broke Rule 34! Better start uploading...")

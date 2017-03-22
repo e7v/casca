@@ -11,7 +11,7 @@ from modules.weather import location, local, code, f_weather
 
 class TestWeather(unittest.TestCase):
     def setUp(self):
-        self.phenny = MagicMock()
+        self.casca = MagicMock()
 
     def test_locations(self):
         def check_places(*args):
@@ -47,24 +47,24 @@ class TestWeather(unittest.TestCase):
             validator(names, lat, lon)
 
     def test_code_94110(self):
-        icao = code(self.phenny, '94110')
+        icao = code(self.casca, '94110')
         self.assertEqual(icao, 'KSFO')
 
     def test_airport(self):
         input = Mock(group=lambda x: 'KIAD')
-        f_weather(self.phenny, input)
+        f_weather(self.casca, input)
         
-        assert self.phenny.say.called is True
+        assert self.casca.say.called is True
 
     def test_place(self):
         input = Mock(group=lambda x: 'Blacksburg')
-        f_weather(self.phenny, input)
+        f_weather(self.casca, input)
         
-        assert self.phenny.say.called is True
+        assert self.casca.say.called is True
 
     def test_notfound(self):
         input = Mock(group=lambda x: 'Hell')
-        f_weather(self.phenny, input)
+        f_weather(self.casca, input)
         
-        self.phenny.say.called_once_with('#phenny',
+        self.casca.say.called_once_with('#casca',
                 "No NOAA data available for that location.")

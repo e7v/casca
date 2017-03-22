@@ -4,14 +4,14 @@ remind.py - Phenny Reminder Module
 Copyright 2011, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://inamidst.com/phenny/
+http://inamidst.com/casca/
 """
 
 import os, re, time, threading
 
 def filename(self): 
     name = self.nick + '-' + self.config.host + '.reminders.db'
-    return os.path.join(os.path.expanduser('~/.phenny'), name)
+    return os.path.join(os.path.expanduser('~/.casca'), name)
 
 def load_database(name): 
     data = {}
@@ -34,27 +34,27 @@ def dump_database(name, data):
             f.write('%s\t%s\t%s\t%s\n' % (unixtime, channel, nick, message))
     f.close()
 
-def setup(phenny): 
-    phenny.rfn = filename(phenny)
-    phenny.rdb = load_database(phenny.rfn)
+def setup(casca): 
+    casca.rfn = filename(casca)
+    casca.rdb = load_database(casca.rfn)
 
-    def monitor(phenny): 
+    def monitor(casca): 
         time.sleep(5)
         while True: 
             now = int(time.time())
-            unixtimes = [int(key) for key in phenny.rdb]
+            unixtimes = [int(key) for key in casca.rdb]
             oldtimes = [t for t in unixtimes if t <= now]
             if oldtimes: 
                 for oldtime in oldtimes: 
-                    for (channel, nick, message) in phenny.rdb[oldtime]: 
+                    for (channel, nick, message) in casca.rdb[oldtime]: 
                         if message: 
-                            phenny.msg(channel, nick + ': ' + message)
-                        else: phenny.msg(channel, nick + '!')
-                    del phenny.rdb[oldtime]
-                dump_database(phenny.rfn, phenny.rdb)
+                            casca.msg(channel, nick + ': ' + message)
+                        else: casca.msg(channel, nick + '!')
+                    del casca.rdb[oldtime]
+                dump_database(casca.rfn, casca.rdb)
             time.sleep(2.5)
 
-    targs = (phenny,)
+    targs = (casca,)
     t = threading.Thread(target=monitor, args=targs)
     t.daemon = True
     t.start()
@@ -102,11 +102,11 @@ periods = '|'.join(list(scaling.keys()))
 p_command = r'\.in ([0-9]+(?:\.[0-9]+)?)\s?((?:%s)\b)?:?\s?(.*)' % periods
 r_command = re.compile(p_command)
 
-def remind(phenny, input): 
+def remind(casca, input): 
     """Set a reminder"""
     m = r_command.match(input.bytes)
     if not m: 
-        return phenny.reply("Sorry, didn't understand the input.")
+        return casca.reply("Sorry, didn't understand the input.")
     length, scale, message = m.groups()
 
     length = float(length)
@@ -120,18 +120,18 @@ def remind(phenny, input):
     t = int(time.time()) + duration
     reminder = (input.sender, input.nick, message)
 
-    try: phenny.rdb[t].append(reminder)
-    except KeyError: phenny.rdb[t] = [reminder]
+    try: casca.rdb[t].append(reminder)
+    except KeyError: casca.rdb[t] = [reminder]
 
-    dump_database(phenny.rfn, phenny.rdb)
+    dump_database(casca.rfn, casca.rdb)
 
     if duration >= 60: 
         w = ''
         if duration >= 3600 * 12: 
             w += time.strftime(' on %d %b %Y', time.gmtime(t))
         w += time.strftime(' at %H:%MZ', time.gmtime(t))
-        phenny.reply('Okay, will remind%s' % w)
-    else: phenny.reply('Okay, will remind in %s secs' % duration)
+        casca.reply('Okay, will remind%s' % w)
+    else: casca.reply('Okay, will remind in %s secs' % duration)
 remind.name = 'in'
 remind.example = '.in 15 minutes do work'
 remind.commands = ['in']
@@ -142,18 +142,18 @@ r_zone = re.compile(r'( ?([A-Za-z]+|[+-]\d\d?))')
 import calendar
 from modules.clock import TimeZones
 
-def at(phenny, input):
+def at(casca, input):
     message = input[4:]
 
     m = r_time.match(message)
     if not m: 
-        return phenny.reply("Sorry, didn't understand the time spec.")
+        return casca.reply("Sorry, didn't understand the time spec.")
     t = m.group(1).replace('.', ':')
     message = message[len(t):]
 
     m = r_zone.match(message)
     if not m: 
-        return phenny.reply("Sorry, didn't understand the zone spec.")
+        return casca.reply("Sorry, didn't understand the zone spec.")
     z = m.group(2)
     message = message[len(m.group(1)):].strip()
 
@@ -162,7 +162,7 @@ def at(phenny, input):
 
     if z in TimeZones:
         tz = TimeZones[z]
-    else: return phenny.reply("Sorry, didn't understand the time zone.")
+    else: return casca.reply("Sorry, didn't understand the time zone.")
 
     d = time.strftime("%Y-%m-%d", time.gmtime())
     d = time.strptime(("%s %s" % (d, t)), "%Y-%m-%d %H:%M")
@@ -171,20 +171,20 @@ def at(phenny, input):
     duration = int((d - time.time()) / 60)
 
     if duration < 1:
-        return phenny.reply("Sorry, that date is this minute or in the past. And only times in the same day are supported!")
+        return casca.reply("Sorry, that date is this minute or in the past. And only times in the same day are supported!")
 
-    # phenny.say("%s %s %s" % (t, tz, d))
+    # casca.say("%s %s %s" % (t, tz, d))
 
     reminder = (input.sender, input.nick, message)
-    # phenny.say(str((d, reminder)))
-    try: phenny.rdb[d].append(reminder)
-    except KeyError: phenny.rdb[d] = [reminder]
+    # casca.say(str((d, reminder)))
+    try: casca.rdb[d].append(reminder)
+    except KeyError: casca.rdb[d] = [reminder]
 
-    phenny.sending.acquire()
-    dump_database(phenny.rfn, phenny.rdb)
-    phenny.sending.release()
+    casca.sending.acquire()
+    dump_database(casca.rfn, casca.rdb)
+    casca.sending.release()
 
-    phenny.reply("Reminding at %s %s - in %s minute(s)" % (t, z, duration))
+    casca.reply("Reminding at %s %s - in %s minute(s)" % (t, z, duration))
 at.commands = ['at']
 
 if __name__ == '__main__': 

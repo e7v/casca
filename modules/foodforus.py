@@ -24,7 +24,7 @@ def _sign_vote(api_key, args):
     return h.hexdigest()
 
 
-def food(phenny, input):
+def food(casca, input):
     """.food"""
     key = input.group(2) or input.sender
     try:
@@ -42,16 +42,16 @@ def food(phenny, input):
     tistr = ", ".join(["{0} ({1})".format(t[0], t[1]) for t in times])
     
     if len(restr) > 0 and len(tistr) > 0:
-        return phenny.say("{0} at {1}".format(restr, tistr))
+        return casca.say("{0} at {1}".format(restr, tistr))
     else:
-        return phenny.say("Sorry, people need to vote before we can food!")
+        return casca.say("Sorry, people need to vote before we can food!")
 food.rule = (['food'], r'(.*)')
 
 
-def foodvote(phenny, input):
+def foodvote(casca, input):
     """.foodvote"""
     if not input.group(2) or not input.group(3):
-        return phenny.reply("You need to specify a place and time, as in "\
+        return casca.reply("You need to specify a place and time, as in "\
                 ".foodvote hokie haus 18:45")
 
     key = input.group(4) or input.sender
@@ -61,7 +61,7 @@ def foodvote(phenny, input):
         'start': input.group(3),
         'key': key.strip(),
     }
-    postdata['sig'] = _sign_vote(phenny.config.foodforus_api_key, postdata)
+    postdata['sig'] = _sign_vote(casca.config.foodforus_api_key, postdata)
 
     try:
         req = web.post(API_URL + '/vote', postdata)
@@ -71,13 +71,13 @@ def foodvote(phenny, input):
                 "EAT NOW‽")
 
     if 'error' in data:
-        phenny.reply(data['error'])
+        casca.reply(data['error'])
     else:
-        phenny.reply("Your vote has been recorded.")
+        casca.reply("Your vote has been recorded.")
 foodvote.rule = (['foodvote'], r'(.*) (\d{2}:\d{2})( .*)?')
 
 
-def pickfood(phenny, input):
+def pickfood(casca, input):
     key = input.group(2) or input.sender
     try:
         req = web.get(API_URL + '/food/' + web.quote(key.strip()))
@@ -90,9 +90,9 @@ def pickfood(phenny, input):
         restaurant = data['restaurants'][0]
         time = data['times'][0]
 
-        phenny.say("Food is {place} ({place_votes} votes) at {time} "\
+        casca.say("Food is {place} ({place_votes} votes) at {time} "\
                 "({time_votes} votes). Happy fooding!".format(place=restaurant[0],
                 place_votes=restaurant[1], time=time[0], time_votes=time[1]))
     else:
-        phenny.say("Sorry, people need to vote before we can food!")
+        casca.say("Sorry, people need to vote before we can food!")
 pickfood.rule = (['pickfood'], r'(.*)')

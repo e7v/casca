@@ -10,7 +10,7 @@ from modules.fcc import fcc
 
 class TestFcc(unittest.TestCase):
     def setUp(self):
-        self.phenny = MagicMock()
+        self.casca = MagicMock()
 
     def test_result(self):
         callsign = 'KK4EWT'
@@ -18,9 +18,9 @@ class TestFcc(unittest.TestCase):
         key = 3326562
 
         input = Mock(group=lambda x: 'KK4EWT')
-        fcc(self.phenny, input)
+        fcc(self.casca, input)
 
-        self.phenny.say.assert_called_once_with('{0} - {1} - '\
+        self.casca.say.assert_called_once_with('{0} - {1} - '\
             'http://wireless2.fcc.gov/UlsApp/UlsSearch/license.jsp?licKey={2}'
             .format(callsign, ham, key))
 
@@ -28,7 +28,7 @@ class TestFcc(unittest.TestCase):
         callsign = 'XFOOBAR'
 
         input = Mock(group=lambda x: callsign)
-        fcc(self.phenny, input)
+        fcc(self.casca, input)
 
-        self.phenny.reply.assert_called_once_with('No results found for '\
+        self.casca.reply.assert_called_once_with('No results found for '\
                 '{0}'.format(callsign))

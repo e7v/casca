@@ -12,64 +12,64 @@ from modules.clock import f_time, beats, yi, tock, npl
 
 class TestClock(unittest.TestCase):
     def setUp(self):
-        self.phenny = MagicMock()
+        self.casca = MagicMock()
 
     @patch('time.time')
     def test_time(self, mock_time):
         mock_time.return_value = 1338674651
         input = Mock(group=lambda x: 'EDT')
-        f_time(self.phenny, input)
+        f_time(self.casca, input)
 
-        self.phenny.msg.called_once_with('#phenny',
+        self.casca.msg.called_once_with('#casca',
                 "Sat, 02 Jun 2012 18:04:11 EDT")
 
     @patch('time.time')
     def test_beats_zero(self, mock_time):
         mock_time.return_value = 0
-        beats(self.phenny, None)
+        beats(self.casca, None)
 
-        self.phenny.say.assert_called_with('@041')
+        self.casca.say.assert_called_with('@041')
 
     @patch('time.time')
     def test_beats_normal(self, mock_time):
         mock_time.return_value = 369182
-        beats(self.phenny, None)
+        beats(self.casca, None)
 
-        self.phenny.say.assert_called_with('@314')
+        self.casca.say.assert_called_with('@314')
 
     @patch('time.time')
     def test_yi_normal(self, mock_time):
         mock_time.return_value = 369182
-        yi(self.phenny, None)
+        yi(self.casca, None)
 
-        self.phenny.say.assert_called_with('Not yet...')
+        self.casca.say.assert_called_with('Not yet...')
 
     @patch('time.time')
     def test_yi_soon(self, mock_time):
         mock_time.return_value = 1339419000
-        yi(self.phenny, None)
+        yi(self.casca, None)
 
-        self.phenny.say.assert_called_with('Soon...')
+        self.casca.say.assert_called_with('Soon...')
 
     @patch('time.time')
     def test_yi_now(self, mock_time):
         mock_time.return_value = 1339419650
-        yi(self.phenny, None)
+        yi(self.casca, None)
 
-        self.phenny.say.assert_called_with('Yes! PARTAI!')
+        self.casca.say.assert_called_with('Yes! PARTAI!')
 
     def test_tock(self):
-        tock(self.phenny, None)
+        tock(self.casca, None)
 
-        out = self.phenny.say.call_args[0][0]
+        out = self.casca.say.call_args[0][0]
         m = re.match('^.* - tycho.usno.navy.mil$',
                 out, flags=re.UNICODE)
         self.assertTrue(m)
 
     def test_npl(self):
-        npl(self.phenny, None)
+        npl(self.casca, None)
 
-        out = self.phenny.say.call_args[0][0]
+        out = self.casca.say.call_args[0][0]
         m = re.match('^.* - ntp1.npl.co.uk$',
                 out, flags=re.UNICODE)
         self.assertTrue(m)

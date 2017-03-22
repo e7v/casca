@@ -10,8 +10,8 @@ from modules import mylife
 
 class TestMylife(unittest.TestCase):
     def setUp(self):
-        self.phenny = MagicMock()
+        self.casca = MagicMock()
 
     def test_fml(self):
-        mylife.fml(self.phenny, None)
-        assert self.phenny.say.called is True
+        mylife.fml(self.casca, None)
+        assert self.casca.say.called is True

@@ -12,7 +12,7 @@ from modules import wiktionary
 
 class TestWiktionary(unittest.TestCase):
     def setUp(self):
-        self.phenny = MagicMock()
+        self.casca = MagicMock()
 
     def test_wiktionary(self):
         w = wiktionary.wiktionary('test')
@@ -27,16 +27,16 @@ class TestWiktionary(unittest.TestCase):
 
     def test_w(self):
         input = Mock(group=lambda x: 'test')
-        wiktionary.w(self.phenny, input)
+        wiktionary.w(self.casca, input)
 
-        out = self.phenny.say.call_args[0][0]
+        out = self.casca.say.call_args[0][0]
         m = re.match('^test — noun: .*$', out, flags=re.UNICODE)
         self.assertTrue(m)
 
     def test_w_none(self):
         word = 'Hell!'
         input = Mock(group=lambda x: word)
-        wiktionary.w(self.phenny, input)
+        wiktionary.w(self.casca, input)
 
-        self.phenny.say.assert_called_once_with(
+        self.casca.say.assert_called_once_with(
                 "Couldn't get any definitions for {0}.".format(word))

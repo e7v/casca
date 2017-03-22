@@ -4,7 +4,7 @@ search.py - Phenny Web Search Module
 Copyright 2008-9, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://inamidst.com/phenny/
+http://inamidst.com/casca/
 """
 
 import re
@@ -41,29 +41,29 @@ def formatnumber(n):
         parts.insert(i, ',')
     return ''.join(parts)
 
-def g(phenny, input): 
+def g(casca, input): 
     """Queries Google for the specified input."""
     query = input.group(2)
     if not query: 
-        return phenny.reply('.g what?')
+        return casca.reply('.g what?')
     uri = google_search(query)
     if uri: 
-        phenny.reply(uri)
-        if not hasattr(phenny.bot, 'last_seen_uri'):
-            phenny.bot.last_seen_uri = {}
-        phenny.bot.last_seen_uri[input.sender] = uri
-    else: phenny.reply("No results found for '%s'." % query)
+        casca.reply(uri)
+        if not hasattr(casca.bot, 'last_seen_uri'):
+            casca.bot.last_seen_uri = {}
+        casca.bot.last_seen_uri[input.sender] = uri
+    else: casca.reply("No results found for '%s'." % query)
 g.commands = ['g']
 g.priority = 'high'
 g.example = '.g swhack'
 
-def gc(phenny, input): 
+def gc(casca, input): 
     """Returns the number of Google results for the specified input."""
     query = input.group(2)
     if not query: 
-        return phenny.reply('.gc what?')
+        return casca.reply('.gc what?')
     num = formatnumber(google_count(query))
-    phenny.say(query + ': ' + num)
+    casca.say(query + ': ' + num)
 gc.commands = ['gc']
 gc.priority = 'high'
 gc.example = '.gc extrapolate'
@@ -72,13 +72,13 @@ r_query = re.compile(
     r'\+?"[^"\\]*(?:\\.[^"\\]*)*"|\[[^]\\]*(?:\\.[^]\\]*)*\]|\S+'
 )
 
-def gcs(phenny, input): 
+def gcs(casca, input): 
     """Compare the number of Google results for the specified paramters."""
     if not input.group(2):
-        return phenny.reply("Nothing to compare.")
+        return casca.reply("Nothing to compare.")
     queries = r_query.findall(input.group(2))
     if len(queries) > 6: 
-        return phenny.reply('Sorry, can only compare up to six things.')
+        return casca.reply('Sorry, can only compare up to six things.')
     results = []
     for i, query in enumerate(queries): 
         query = query.strip('[]')
@@ -89,7 +89,7 @@ def gcs(phenny, input):
 
     results = [(term, n) for (n, term) in reversed(sorted(results))]
     reply = ', '.join('%s (%s)' % (t, formatnumber(n)) for (t, n) in results)
-    phenny.say(reply)
+    casca.say(reply)
 gcs.commands = ['gcs', 'comp']
 gcs.example = '.gcs Ronaldo Messi'
 
@@ -102,7 +102,7 @@ def bing_search(query, lang='en-GB'):
     m = r_bing.search(bytes)
     if m: return m.group(1)
 
-def bing(phenny, input): 
+def bing(casca, input): 
     """Queries Bing for the specified input."""
     query = input.group(2)
     if query.startswith(':'): 
@@ -110,14 +110,14 @@ def bing(phenny, input):
         lang = lang[1:]
     else: lang = 'en-GB'
     if not query:
-        return phenny.reply('.bing what?')
+        return casca.reply('.bing what?')
     uri = bing_search(query, lang)
     if uri: 
-        phenny.reply(uri)
-        if not hasattr(phenny.bot, 'last_seen_uri'):
-            phenny.bot.last_seen_uri = {}
-        phenny.bot.last_seen_uri[input.sender] = uri
-    else: phenny.reply("No results found for '%s'." % query)
+        casca.reply(uri)
+        if not hasattr(casca.bot, 'last_seen_uri'):
+            casca.bot.last_seen_uri = {}
+        casca.bot.last_seen_uri[input.sender] = uri
+    else: casca.reply("No results found for '%s'." % query)
 bing.commands = ['bing']
 bing.example = '.bing swhack'
 
@@ -143,25 +143,25 @@ def duck_api(query):
         return json['AbstractURL'] + ' : ' + json['Abstract']
     else: return json['AbstractURL']
 
-def duck(phenny, input):
+def duck(casca, input):
     """Queries DuckDuckGo for specified input.""" 
     query = input.group(2)
-    if not query: return phenny.reply('.ddg what?')
+    if not query: return casca.reply('.ddg what?')
     uri = duck_api(query)
     if not uri:
         uri = duck_search(query)
     if uri: 
-        phenny.reply(uri)
-        if not hasattr(phenny.bot, 'last_seen_uri'):
-            phenny.bot.last_seen_uri = {}
-        phenny.bot.last_seen_uri[input.sender] = uri
-    else: phenny.reply("No results found for '%s'." % query)
+        casca.reply(uri)
+        if not hasattr(casca.bot, 'last_seen_uri'):
+            casca.bot.last_seen_uri = {}
+        casca.bot.last_seen_uri[input.sender] = uri
+    else: casca.reply("No results found for '%s'." % query)
 duck.commands = ['duck', 'ddg']
 duck.example = '.duck football'
 
-def search(phenny, input): 
+def search(casca, input): 
     if not input.group(2): 
-        return phenny.reply('.search for what?')
+        return casca.reply('.search for what?')
     query = input.group(2)
     gu = google_search(query) or '-'
     bu = bing_search(query) or '-'
@@ -181,18 +181,18 @@ def search(phenny, input):
         if len(du) > 150: du = '(extremely long link)'
         result = '%s (g), %s (b), %s (d)' % (gu, bu, du)
 
-    phenny.reply(result)
+    casca.reply(result)
 search.commands = ['search']
 
-def suggest(phenny, input): 
+def suggest(casca, input): 
     if not input.group(2):
-        return phenny.reply("No query term.")
+        return casca.reply("No query term.")
     query = input.group(2)
     uri = 'http://websitedev.de/temp-bin/suggest.pl?q='
     answer = web.get(uri + web.quote(query).replace('+', '%2B'))
     if answer: 
-        phenny.say(answer)
-    else: phenny.reply('Sorry, no result.')
+        casca.say(answer)
+    else: casca.reply('Sorry, no result.')
 suggest.commands = ['suggest']
 
 if __name__ == '__main__': 

@@ -22,7 +22,7 @@ config_filename = ""
 def setup(self):
     fn = self.nick + '-' + self.config.host + '.lastfm.db'
     global config_filename
-    config_filename = os.path.join(os.path.expanduser('~/.phenny'), fn)
+    config_filename = os.path.join(os.path.expanduser('~/.casca'), fn)
     if not os.path.exists(config_filename):
         try: f = open(config_filename, 'w')
         except OSError: pass
@@ -38,36 +38,36 @@ def setup(self):
     if not config.has_section("Nick2Verb"):
         config.add_section("Nick2Verb")
 
-def lastfm_set(phenny, input):
+def lastfm_set(casca, input):
     cmd = input.group(2)
     if not cmd or len(cmd.strip()) == 0:
-        phenny.say("commands: user, verb")
-        phenny.say("set <username>: associates your IRC nick with your last.fm username.")
-        phenny.say("example: lastfm-set user joebob")
-        phenny.say("verb <past>,<present>: customizes the verbs used when displaying your now playing info.")
-        phenny.say("example: lastfm-set verb listened to, is listening to")
+        casca.say("commands: user, verb")
+        casca.say("set <username>: associates your IRC nick with your last.fm username.")
+        casca.say("example: lastfm-set user joebob")
+        casca.say("verb <past>,<present>: customizes the verbs used when displaying your now playing info.")
+        casca.say("example: lastfm-set verb listened to, is listening to")
         return
     if cmd == "user":
         value = input.group(5)
         if len(value) == 0:
-            phenny.say("um.. try again. the format is 'lastfm-set user username'")
+            casca.say("um.. try again. the format is 'lastfm-set user username'")
             return
         set_username(input.nick, value)
-        phenny.say("ok, i'll remember that %s is %s on lastfm" % (input.nick, value))
+        casca.say("ok, i'll remember that %s is %s on lastfm" % (input.nick, value))
         return
     if cmd == "verb":
         past = input.group(3)
         present = input.group(4)
         if len(past) == 0 or len(present) == 0:
-            phenny.say("umm.. try again. the format is 'lastfm-set verb past phrase, present phrase' example: 'lastfm-set verb listened to, listening to'")
+            casca.say("umm.. try again. the format is 'lastfm-set verb past phrase, present phrase' example: 'lastfm-set verb listened to, listening to'")
             return
         set_verb(input.nick, past, present)
-        phenny.say("ok, i'll remember that %s prefers '%s' and '%s'" % (input.nick, past, present))
+        casca.say("ok, i'll remember that %s prefers '%s' and '%s'" % (input.nick, past, present))
         return
 
 lastfm_set.rule = (['lastfm-set'], r'(\S+)\s+(?:(.*?),(.*)|(\S+))')
 
-def now_playing(phenny, input):
+def now_playing(casca, input):
     nick = input.nick
     user = ""
     arg = input.group(2)
@@ -84,20 +84,20 @@ def now_playing(phenny, input):
         req = web.get("%smethod=user.getrecenttracks&user=%s" % (APIURL, web.quote(user)))
     except web.HTTPError as e:
         if e.response.status_code == 400:
-            phenny.say("%s doesn't exist on last.fm, perhaps they need to set user" % (user))
+            casca.say("%s doesn't exist on last.fm, perhaps they need to set user" % (user))
             return
         else:
-            phenny.say("uhoh. try again later, mmkay?")
+            casca.say("uhoh. try again later, mmkay?")
             return
     root = etree.fromstring(req.encode('utf-8'))
     recenttracks = list(root)
     if len(recenttracks) == 0:
-        phenny.say("%s hasn't played anything recently. this isn't you? try lastfm-set" % (user))
+        casca.say("%s hasn't played anything recently. this isn't you? try lastfm-set" % (user))
         return
     tracks = list(recenttracks[0])
     #print(etree.tostring(recenttracks[0]))
     if len(tracks) == 0:
-        phenny.say("%s hasn't played anything recently. this isn't you? try lastfm-set" % (user))
+        casca.say("%s hasn't played anything recently. this isn't you? try lastfm-set" % (user))
         return
     first = tracks[0]
     now = True if first.get("nowplaying") == "true" else False
@@ -121,11 +121,11 @@ def now_playing(phenny, input):
 
     if now:
         present = get_verb(nick)[1]
-        phenny.say("%s %s \"%s\" by %s on %s" %(user.strip(), present.strip(), track, artist, album ))
+        casca.say("%s %s \"%s\" by %s on %s" %(user.strip(), present.strip(), track, artist, album ))
         return
     else:
         past = get_verb(nick)[0]
-        phenny.say("%s %s \"%s\" by %s on %s %s" %(user.strip(), past.strip(), track, artist, album, pretty_date(stamp)))
+        casca.say("%s %s \"%s\" by %s on %s %s" %(user.strip(), past.strip(), track, artist, album, pretty_date(stamp)))
 
 now_playing.commands = ['np']
 

@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 """
-wuvt.py - WUVT now playing module for phenny
+wuvt.py - WUVT now playing module for casca
 """
 
 from tools import GrumbleError
 import web
 
 
-def wuvt(phenny, input):
+def wuvt(casca, input):
     """.wuvt - Find out what is currently playing on the radio station WUVT."""
 
     try:
@@ -18,7 +18,7 @@ def wuvt(phenny, input):
         raise GrumbleError("Failed to fetch current track from WUVT")
 
     if 'listeners' in trackinfo:
-        phenny.say(
+        casca.say(
             "{dj} is currently playing \"{title}\" by {artist} with "
             "{listeners:d} online listeners".format(
                 dj=trackinfo['dj'],
@@ -26,7 +26,7 @@ def wuvt(phenny, input):
                 artist=trackinfo['artist'],
                 listeners=trackinfo['listeners']))
     else:
-        phenny.say("{dj} is currently playing \"{title}\" by {artist}".format(
+        casca.say("{dj} is currently playing \"{title}\" by {artist}".format(
             dj=trackinfo['dj'],
             title=trackinfo['title'],
             artist=trackinfo['artist']))

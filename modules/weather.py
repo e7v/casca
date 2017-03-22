@@ -4,7 +4,7 @@ weather.py - Phenny Weather Module
 Copyright 2008, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://inamidst.com/phenny/
+http://inamidst.com/casca/
 """
 
 import re
@@ -49,7 +49,7 @@ def local(icao, hour, minute):
     return str(hour) + ':' + str(minute) + 'Z'
 
 
-def code(phenny, search):
+def code(casca, search):
     from icao import data
     
     if search.upper() in [loc[0] for loc in data]:
@@ -68,16 +68,16 @@ def code(phenny, search):
         return sumOfSquares[1]
 
 
-def f_weather(phenny, input):
+def f_weather(casca, input):
     """.weather <ICAO> - Show the weather at airport with the code <ICAO>."""
     icao_code = input.group(2)
     if not icao_code:
-        return phenny.say("Try .weather London, for example?")
+        return casca.say("Try .weather London, for example?")
 
-    icao_code = code(phenny, icao_code)
+    icao_code = code(casca, icao_code)
 
     if not icao_code:
-        phenny.say("No ICAO code found, sorry")
+        casca.say("No ICAO code found, sorry")
         return
 
     uri = 'http://tgftp.nws.noaa.gov/data/observations/metar/stations/%s.TXT'
@@ -86,14 +86,14 @@ def f_weather(phenny, input):
     except AttributeError:
         raise GrumbleError('OH CRAP NOAA HAS GONE DOWN THE WEB IS BROKEN')
     except web.HTTPError:
-        phenny.say("No NOAA data available for that location.")
+        casca.say("No NOAA data available for that location.")
         return
 
     if 'Not Found' in bytes:
-        phenny.say(icao_code + ": no such ICAO code, or no NOAA data")
+        casca.say(icao_code + ": no such ICAO code, or no NOAA data")
         return
 
-    phenny.say(str(metar.parse(bytes)))
+    casca.say(str(metar.parse(bytes)))
 f_weather.rule = (['weather'], r'(.*)')
 
 if __name__ == '__main__':

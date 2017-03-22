@@ -1,5 +1,5 @@
 """
-Tests for phenny's metar.py
+Tests for casca's metar.py
 """
 
 import unittest

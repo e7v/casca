@@ -9,12 +9,12 @@ import web
 import json
 
 
-def urbandict(phenny, input):
+def urbandict(casca, input):
     """.urb <word> - Search Urban Dictionary for a definition."""
 
     word = input.group(2)
     if not word:
-        phenny.say(urbandict.__doc__.strip())
+        casca.say(urbandict.__doc__.strip())
         return
 
     # create opener
@@ -34,7 +34,7 @@ def urbandict(phenny, input):
             "Urban Dictionary slemped out on me. Try again in a minute.")
 
     if data['result_type'] == 'no_results':
-        phenny.say("No results found for {0}".format(word))
+        casca.say("No results found for {0}".format(word))
         return
 
     result = data['list'][0]
@@ -42,7 +42,7 @@ def urbandict(phenny, input):
         web.quote(word))
 
     response = "{0} - {1}".format(result['definition'].strip()[:256], url)
-    phenny.say(response)
+    casca.say(response)
 urbandict.name = 'urb'
 urbandict.rule = (['urb'], r'(.*)')
 

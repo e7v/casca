@@ -4,10 +4,10 @@ freenode.py - Freenode Specific Stuff
 Copyright 2008, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://inamidst.com/phenny/
+http://inamidst.com/casca/
 """
 
-def replaced(phenny, input): 
+def replaced(casca, input): 
    command = input.group(1)
    responses = {
       'cp': '.cp has been replaced by .u', 
@@ -26,7 +26,7 @@ def replaced(phenny, input):
    }
    try: response = responses[command]
    except KeyError: return
-   else: phenny.reply(response)
+   else: casca.reply(response)
 replaced.commands = [
    'cp', 'pc', 'unicode', 'compare', 'map', 'acronym', 
    'v', 'validate', 'thesaurus', 'web', 'mangle', 'origin', 

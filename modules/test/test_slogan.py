@@ -10,7 +10,7 @@ from modules.slogan import sloganize, slogan
 
 class TestSlogan(unittest.TestCase):
     def setUp(self):
-        self.phenny = MagicMock()
+        self.casca = MagicMock()
 
     def test_sloganize(self):
         out = sloganize('slogan')
@@ -18,13 +18,13 @@ class TestSlogan(unittest.TestCase):
 
     def test_slogan(self):
         input = Mock(group=lambda x: 'slogan')
-        slogan(self.phenny, input)
+        slogan(self.casca, input)
 
-        out = self.phenny.say.call_args[0][0]
+        out = self.casca.say.call_args[0][0]
         self.assertRegex(out, ".*slogan.*")
 
     def test_slogan_none(self):
         input = Mock(group=lambda x: None)
-        slogan(self.phenny, input)
-        self.phenny.say.assert_called_once_with(
+        slogan(self.casca, input)
+        self.casca.say.assert_called_once_with(
             "You need to specify a word; try .slogan Granola")

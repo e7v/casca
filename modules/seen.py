@@ -4,25 +4,25 @@ seen.py - Phenny Seen Module
 Copyright 2008, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://inamidst.com/phenny/
+http://inamidst.com/casca/
 """
 
 import time, os, shelve, datetime
 from tools import deprecated
 
-def f_seen(phenny, input): 
+def f_seen(casca, input): 
     """.seen <nick> - Reports when <nick> was last seen."""
     nick = input.group(2).lower()
-    if not hasattr(phenny, 'seen'): 
-        return phenny.msg(input.sender, '?')
-    if nick in phenny.seen: 
-        channel, t = phenny.seen[nick]
+    if not hasattr(casca, 'seen'): 
+        return casca.msg(input.sender, '?')
+    if nick in casca.seen: 
+        channel, t = casca.seen[nick]
         dt = timesince(datetime.datetime.utcfromtimestamp(t))
         t = time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime(t))
 
         msg = "I last saw %s at %s (%s) on %s" % (nick, t, dt, channel)
-        phenny.reply(msg)
-    else: phenny.reply("Sorry, I haven't seen %s around." % nick)
+        casca.reply(msg)
+    else: casca.reply("Sorry, I haven't seen %s around." % nick)
 f_seen.name = 'seen'
 f_seen.example = '.seen firespeaker'
 f_seen.rule = (['seen'], r'(\S+)')
@@ -32,7 +32,7 @@ def f_note(self, origin, match, args):
     def note(self, origin, match, args): 
         if not hasattr(self.bot, 'seen'): 
             fn = self.nick + '-' + self.config.host + '.seen'
-            path = os.path.join(os.path.expanduser('~/.phenny'), fn)
+            path = os.path.join(os.path.expanduser('~/.casca'), fn)
             self.bot.seen = shelve.open(path)
         if origin.sender.startswith('#'): 
             self.seen[origin.nick.lower()] = (origin.sender, time.time())

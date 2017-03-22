@@ -1,5 +1,5 @@
 """
-Tests for phenny's bot.py
+Tests for casca's bot.py
 """
 
 import unittest
@@ -11,16 +11,16 @@ class BotTest(unittest.TestCase):
     @patch('bot.Phenny.setup')
     def setUp(self, mock_setup):
         class MockConfig(object):
-            nick = 'phenny'
+            nick = 'casca'
             password = 'nickserv_pass'
             name = 'Phenny'
             host = 'irc.example.com'
             port = 6667
             ssl = False
             ipv6 = True
-            channels = ['#phenny']
-            owner = 'phenny_owner'
-            admins = [owner, 'phenny_admin']
+            channels = ['#casca']
+            owner = 'casca_owner'
+            admins = [owner, 'casca_admin']
             prefix = '.'
 
         self.bot = bot.Phenny(MockConfig)
@@ -28,13 +28,13 @@ class BotTest(unittest.TestCase):
     def test_input(self):
         class MockOrigin(object):
             nick = 'sock_puppet'
-            sender = '#phenny'
+            sender = '#casca'
 
         origin = MockOrigin()
-        text = "Are you ready for phenny?"
+        text = "Are you ready for casca?"
         match = Mock()
         event = "PRIVMSG"
-        args = ('#phenny', )
+        args = ('#casca', )
         cmdinput = self.bot.input(origin, text, text, match, event, args)
 
         self.assertEqual(cmdinput.sender, origin.sender)
@@ -50,28 +50,28 @@ class BotTest(unittest.TestCase):
 
     def test_owner(self):
         class MockOrigin(object):
-            nick = 'phenny_owner'
-            sender = '#phenny'
+            nick = 'casca_owner'
+            sender = '#casca'
 
         origin = MockOrigin()
-        text = "Are you ready for phenny?"
+        text = "Are you ready for casca?"
         match = Mock()
         event = "PRIVMSG"
-        args = ('#phenny', )
+        args = ('#casca', )
         cmdinput = self.bot.input(origin, text, text, match, event, args)
 
         self.assertEqual(cmdinput.owner, True)
 
     def test_admin(self):
         class MockOrigin(object):
-            nick = 'phenny_admin'
-            sender = '#phenny'
+            nick = 'casca_admin'
+            sender = '#casca'
 
         origin = MockOrigin()
-        text = "Are you ready for phenny?"
+        text = "Are you ready for casca?"
         match = Mock()
         event = "PRIVMSG"
-        args = ('#phenny', )
+        args = ('#casca', )
         cmdinput = self.bot.input(origin, text, text, match, event, args)
 
         self.assertEqual(cmdinput.admin, True)

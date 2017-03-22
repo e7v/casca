@@ -15,7 +15,7 @@ import metar
 import web
 
 
-def tfw(phenny, input, fahrenheit=False, celsius=False, mev=False):
+def tfw(casca, input, fahrenheit=False, celsius=False, mev=False):
     """.tfw <city/zip> - Show the fucking weather at the specified location."""
 
     where = input.group(2)
@@ -23,10 +23,10 @@ def tfw(phenny, input, fahrenheit=False, celsius=False, mev=False):
         # default to Blacksburg, VA
         icao_code = "KBCB"
     else:
-        icao_code = weather.code(phenny, where)
+        icao_code = weather.code(casca, where)
 
     if not icao_code:
-        phenny.say("WHERE THE FUCK IS THAT? Try another location.")
+        casca.say("WHERE THE FUCK IS THAT? Try another location.")
         return
 
     uri = 'http://tgftp.nws.noaa.gov/data/observations/metar/stations/%s.TXT'
@@ -35,11 +35,11 @@ def tfw(phenny, input, fahrenheit=False, celsius=False, mev=False):
     except AttributeError:
         raise GrumbleError("THE INTERNET IS FUCKING BROKEN. Please try again later.")
     except web.HTTPError:
-        phenny.say("WHERE THE FUCK IS THAT? Try another location.")
+        casca.say("WHERE THE FUCK IS THAT? Try another location.")
         return
 
     if 'Not Found' in bytes:
-        phenny.say("WHERE THE FUCK IS THAT? Try another location.")
+        casca.say("WHERE THE FUCK IS THAT? Try another location.")
         return
 
     w = metar.parse(bytes)
@@ -194,24 +194,24 @@ def tfw(phenny, input, fahrenheit=False, celsius=False, mev=False):
     response = "{temp} {remark} - {flavor} - {location} {time}Z".format(
         temp=temp, remark=remark, flavor=flavor, location=w.station,
         time=w.time.strftime("%H:%M"))
-    phenny.say(response)
+    casca.say(response)
 tfw.rule = (['tfw', 'tfwm'], r'(.*)')
 
 
-def tfwf(phenny, input):
+def tfwf(casca, input):
     """.tfwf <city/zip> - The fucking weather, in fucking degrees Fahrenheit."""
-    return tfw(phenny, input, fahrenheit=True)
+    return tfw(casca, input, fahrenheit=True)
 tfwf.rule = (['tfwf'], r'(.*)')
 
 
-def tfwc(phenny, input):
+def tfwc(casca, input):
     """.tfwc <city/zip> - The fucking weather, in fucking degrees celsius."""
-    return tfw(phenny, input, celsius=True)
+    return tfw(casca, input, celsius=True)
 tfwc.rule = (['tfwc'], r'(.*)')
 
-def tfwev(phenny, input):
+def tfwev(casca, input):
     """.tfwc <city/zip> - The fucking weather, in fucking degrees celsius."""
-    return tfw(phenny, input, mev=True)
+    return tfw(casca, input, mev=True)
 tfwev.rule = (['tfwev'], r'(.*)')
 
 if __name__ == '__main__':

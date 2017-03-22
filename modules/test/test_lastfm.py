@@ -14,21 +14,21 @@ class TestLastfm(unittest.TestCase):
     user2 = 'telnoratti'
 
     def setUp(self):
-        self.phenny = MagicMock()
+        self.casca = MagicMock()
 
     def test_now_playing(self):
         input = Mock(group=lambda x: self.user1)
-        now_playing(self.phenny, input)
+        now_playing(self.casca, input)
 
-        out = self.phenny.say.call_args[0][0]
+        out = self.casca.say.call_args[0][0]
         m = re.match('^{0} listened to ".+" by .+ on .+ .*$'.format(self.user1), out, flags=re.UNICODE)
         self.assertTrue(m)
 
     def test_now_playing_sender(self):
         input = Mock(group=lambda x: '')
         input.nick = self.user1
-        now_playing(self.phenny, input)
+        now_playing(self.casca, input)
 
-        out = self.phenny.say.call_args[0][0]
+        out = self.casca.say.call_args[0][0]
         m = re.match('^{0} listened to ".+" by .+ on .+ .*$'.format(self.user1), out, flags=re.UNICODE)
         self.assertTrue(m)

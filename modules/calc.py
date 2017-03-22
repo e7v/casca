@@ -5,7 +5,7 @@ calc.py - Phenny Calculator Module
 Copyright 2008, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://inamidst.com/phenny/
+http://inamidst.com/casca/
 """
 
 import re
@@ -21,16 +21,16 @@ subs = [
 ]
 
 
-def c(phenny, input):
+def c(casca, input):
     """DuckDuckGo calculator."""
     if not input.group(2):
-        return phenny.reply("Nothing to calculate.")
+        return casca.reply("Nothing to calculate.")
     q = input.group(2)
 
     try:
         r = web.get(
             'https://api.duckduckgo.com/?q={}&format=json&no_html=1'
-            '&t=mutantmonkey/phenny'.format(web.quote(q)))
+            '&t=mutantmonkey/casca'.format(web.quote(q)))
     except web.HTTPError:
         raise GrumbleError("Couldn't parse the result from DuckDuckGo.")
 
@@ -41,9 +41,9 @@ def c(phenny, input):
         answer = None
 
     if answer:
-        phenny.say(answer)
+        casca.say(answer)
     else:
-        phenny.reply('Sorry, no result.')
+        casca.reply('Sorry, no result.')
 c.commands = ['c']
 c.example = '.c 5 + 3'
 

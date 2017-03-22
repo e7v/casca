@@ -13,47 +13,47 @@ from modules import tfw
 
 class TestTfw(unittest.TestCase):
     def setUp(self):
-        self.phenny = MagicMock()
+        self.casca = MagicMock()
 
     def test_badloc(self):
         input = Mock(group=lambda x: 'tu3jgoajgoahghqog')
-        tfw.tfw(self.phenny, input)
+        tfw.tfw(self.casca, input)
 
-        self.phenny.say.assert_called_once_with(
+        self.casca.say.assert_called_once_with(
             "WHERE THE FUCK IS THAT? Try another location.")
 
     def test_celsius(self):
         input = Mock(group=lambda x: '24060')
-        tfw.tfw(self.phenny, input, celsius=True)
+        tfw.tfw(self.casca, input, celsius=True)
 
-        out = self.phenny.say.call_args[0][0]
+        out = self.casca.say.call_args[0][0]
         m = re.match('^[\-\d]+°C‽ .* \- .* \- [A-Z]{4} \d{2}:\d{2}Z$', out,
                      flags=re.UNICODE)
         self.assertTrue(m)
 
     def test_fahrenheit(self):
         input = Mock(group=lambda x: '24060')
-        tfw.tfw(self.phenny, input, fahrenheit=True)
+        tfw.tfw(self.casca, input, fahrenheit=True)
 
-        out = self.phenny.say.call_args[0][0]
+        out = self.casca.say.call_args[0][0]
         m = re.match('^[\-\d]+°F‽ .* \- .* \- [A-Z]{4} \d{2}:\d{2}Z$', out,
                      flags=re.UNICODE)
         self.assertTrue(m)
 
     def test_mev(self):
         input = Mock(group=lambda x: '24060')
-        tfw.tfwev(self.phenny, input)
+        tfw.tfwev(self.casca, input)
 
-        out = self.phenny.say.call_args[0][0]
+        out = self.casca.say.call_args[0][0]
         m = re.match('^[\-\d\.]+ meV‽ .* \- .* \- [A-Z]{4} \d{2}:\d{2}Z$', out,
                      flags=re.UNICODE)
         self.assertTrue(m)
 
     def test_meter(self):
         input = Mock(group=lambda x: '24060')
-        tfw.tfw(self.phenny, input)
+        tfw.tfw(self.casca, input)
 
-        out = self.phenny.say.call_args[0][0]
+        out = self.casca.say.call_args[0][0]
         m = re.match('^[\-\d\.]+ Meters‽ .* \- .* \- [A-Z]{4} \d{2}:\d{2}Z$', out,
                      flags=re.UNICODE)
         self.assertTrue(m)
@@ -62,9 +62,9 @@ class TestTfw(unittest.TestCase):
         input = Mock(group=lambda x: 'KBCB')
         tfw.web = MagicMock()
         tfw.metar.parse = lambda x: Mock(temperature=21)
-        tfw.tfwf(self.phenny, input)
+        tfw.tfwf(self.casca, input)
 
-        out = self.phenny.say.call_args[0][0]
+        out = self.casca.say.call_args[0][0]
         m = re.match(
             r'^69°F‽ IT\'S FUCKING SEXY TIME \- .*',
             out,

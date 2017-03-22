@@ -13,72 +13,72 @@ from modules.search import duck_api, google_search, google_count, \
 
 class TestSearch(unittest.TestCase):
     def setUp(self):
-        self.phenny = MagicMock()
+        self.casca = MagicMock()
 
     def test_google_search(self):
-        out = google_search('phenny')
+        out = google_search('casca')
 
         m = re.match('^https?://.*$', out, flags=re.UNICODE)
         self.assertTrue(m)
 
     def test_g(self):
         input = Mock(group=lambda x: 'swhack')
-        g(self.phenny, input)
+        g(self.casca, input)
 
-        assert self.phenny.reply.called is True
+        assert self.casca.reply.called is True
 
     def test_gc(self):
         query = 'extrapolate'
         input = Mock(group=lambda x: query)
-        gc(self.phenny, input)
+        gc(self.casca, input)
 
-        out = self.phenny.say.call_args[0][0]
+        out = self.casca.say.call_args[0][0]
         m = re.match('^{0}: [0-9,\.]+$'.format(query), out, flags=re.UNICODE)
         self.assertTrue(m)
 
     def test_gcs(self):
-        input = Mock(group=lambda x: 'vtluug virginia phenny')
-        gcs(self.phenny, input)
+        input = Mock(group=lambda x: 'vtluug virginia casca')
+        gcs(self.casca, input)
 
-        assert self.phenny.say.called is True
+        assert self.casca.say.called is True
 
     def test_bing_search(self):
-        out = bing_search('phenny')
+        out = bing_search('casca')
 
         m = re.match('^https?://.*$', out, flags=re.UNICODE)
         self.assertTrue(m)
 
     def test_bing(self):
         input = Mock(group=lambda x: 'swhack')
-        bing(self.phenny, input)
+        bing(self.casca, input)
 
-        assert self.phenny.reply.called is True
+        assert self.casca.reply.called is True
 
     def test_duck_search(self):
-        out = duck_search('phenny')
+        out = duck_search('casca')
 
         m = re.match('^https?://.*$', out, flags=re.UNICODE)
         self.assertTrue(m)
 
     def test_duck(self):
         input = Mock(group=lambda x: 'swhack')
-        duck(self.phenny, input)
+        duck(self.casca, input)
 
-        assert self.phenny.reply.called is True
+        assert self.casca.reply.called is True
 
     def test_duck_api(self):
         input = Mock(group=lambda x: 'swhack')
-        duck(self.phenny, input)
+        duck(self.casca, input)
 
     def test_search(self):
         input = Mock(group=lambda x: 'vtluug')
-        duck(self.phenny, input)
+        duck(self.casca, input)
 
-        assert self.phenny.reply.called is True
+        assert self.casca.reply.called is True
 
     def test_suggest(self):
         input = Mock(group=lambda x: 'vtluug')
-        suggest(self.phenny, input)
+        suggest(self.casca, input)
 
-        assert (self.phenny.reply.called is True or \
-                self.phenny.say.called is True)
+        assert (self.casca.reply.called is True or \
+                self.casca.say.called is True)

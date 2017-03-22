@@ -4,7 +4,7 @@ bot.py - Phenny IRC Bot
 Copyright 2008, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://inamidst.com/phenny/
+http://inamidst.com/casca/
 """
 
 import sys, os, re, threading, imp
@@ -159,8 +159,8 @@ class Phenny(irc.Bot):
 
     def wrapped(self, origin, text, match): 
         class PhennyWrapper(object): 
-            def __init__(self, phenny): 
-                self.bot = phenny
+            def __init__(self, casca): 
+                self.bot = casca
 
             def __getattr__(self, attr): 
                 sender = origin.sender or text
@@ -193,8 +193,8 @@ class Phenny(irc.Bot):
 
         return CommandInput(text, origin, bytes, match, event, args)
 
-    def call(self, func, origin, phenny, input): 
-        try: func(phenny, input)
+    def call(self, func, origin, casca, input): 
+        try: func(casca, input)
         except tools.GrumbleError as e:
             self.msg(origin.sender, str(e))
         except Exception as e: 
@@ -226,14 +226,14 @@ class Phenny(irc.Bot):
                     if match: 
                         if self.limit(origin, func): continue
 
-                        phenny = self.wrapped(origin, text, match)
+                        casca = self.wrapped(origin, text, match)
                         input = self.input(origin, text, bytes, match, event, args)
 
                         if func.thread: 
-                            targs = (func, origin, phenny, input)
+                            targs = (func, origin, casca, input)
                             t = threading.Thread(target=self.call, args=targs)
                             t.start()
-                        else: self.call(func, origin, phenny, input)
+                        else: self.call(func, origin, casca, input)
 
                         for source in [decode(origin.sender), decode(origin.nick)]: 
                             try: self.stats[(func.name, source)] += 1
