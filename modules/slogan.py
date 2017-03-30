@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-slogan.py - Phenny Slogan Module
+slogan.py - Casca Slogan Module
 Copyright (c) 2011 Dafydd Crosby - http://www.dafyddcrosby.com
 
 Licensed under the Eiffel Forum License 2.

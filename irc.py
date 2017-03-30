@@ -4,7 +4,7 @@ irc.py - A Utility IRC Bot
 Copyright 2008, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://inamidst.com/casca/
+http://github.com/faxalter/casca/casca/
 """
 
 import sys, re, time, traceback

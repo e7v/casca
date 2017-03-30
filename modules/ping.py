@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """
-ping.py - Phenny Ping Module
+ping.py - Casca Ping Module
 Author: Sean B. Palmer, inamidst.com
-About: http://inamidst.com/casca/
+About: http://github.com/faxalter/casca/casca/
 """
 
 import random

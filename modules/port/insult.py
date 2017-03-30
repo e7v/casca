@@ -5,7 +5,7 @@ by alekhin0w
 
 More info:
  * Jenni: https://github.com/myano/casca/
- * Phenny: http://inamidst.com/casca/
+ * Casca: http://github.com/faxalter/casca/casca/
 """
 import os, random
 from modules import unicode as uc

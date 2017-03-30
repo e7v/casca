@@ -2,7 +2,7 @@
 """
 web.py - Web Facilities
 Author: Sean B. Palmer, inamidst.com
-About: http://inamidst.com/casca/
+About: http://github.com/faxalter/casca/casca/
 """
 
 import re
@@ -14,7 +14,7 @@ from requests.exceptions import ConnectionError, HTTPError, InvalidURL
 from html.entities import name2codepoint
 from urllib.parse import quote, unquote
 
-user_agent = "Mozilla/5.0 (Phenny)"
+user_agent = "Mozilla/5.0 (Casca)"
 default_headers = {'User-Agent': user_agent}
 
 def get(uri, headers={}, verify=True, **kwargs): 

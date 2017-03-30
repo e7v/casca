@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-wuvt.py - WUVT now playing module for casca
+bit.py - WUVT now playing module for casca
 """
 
 import urllib.request, json

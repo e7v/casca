@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 """
-admin.py - Phenny Admin Module
+admin.py - Casca Admin Module
 Copyright 2008-9, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://inamidst.com/casca/
+http://github.com/faxalter/casca/casca/
 """
 
 def join(casca, input): 

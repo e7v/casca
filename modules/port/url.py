@@ -8,7 +8,7 @@ Licensed under the Eiffel Forum License 2.
 
 More info:
  * casca: https://github.com/myano/casca/
- * Phenny: http://inamidst.com/casca/
+ * Casca: http://github.com/faxalter/casca/casca/
 
 This module will record all URLs to bitly via an api key and account.
 It also automatically displays the "title" of any URL pasted into the channel.

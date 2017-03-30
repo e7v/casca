@@ -1,13 +1,11 @@
-# casca
-[![Build Status](https://travis-ci.org/mutantmonkey/casca.png?branch=master)](https://travis-ci.org/mutantmonkey/casca)
-
-This is casca, a Python IRC bot. Originally written by Sean B. Palmer, it has
-been ported to Python3.
+# Casca
+This is Casca, a Python IRC bot. Originally written by Sean B. Palmer, it has
+been ported to Python3 by mutantmonkey, and is currently maintained by me. 
 
 This version comes with many new modules, SASL support, IPv6 support, TLS support, and unit
 tests.
 
-Compatibility with existing casca modules has been mostly retained, but they
+Compatibility with existing Casca modules has been mostly retained, but they
 will need to be updated to run on Python3 if they do not already. All of the
 core modules have been ported, removed, or replaced.
 
@@ -22,10 +20,42 @@ core modules have been ported, removed, or replaced.
 
 Enjoy!
 
+## Commands
+
+
+.beats - Returns the current internet time 
+.bytes - Return the byte representation of . 
+.c — Query Google calculator.
+.calc - Return the Frink calc for. 
+.char - Get info about a sequence. 
+.choose <red> <blue> - for when you just can't decide.
+.dict - Returns the definition of. 
+.ety — Look up the etymology of a word
+.g - Google for and return the top result. 
+.gc — Get the number of results on Google
+.head - Perform an HTTP HEAD on URI. 
+.in — Set a reminder
+.py — Evaluate an expression in python
+.seen - Reports when was last seen. 
+.t [ ] - Returns the current time 
+.t — Return the current time
+.tell - I'll remind nick about blargh. 
+.title — Get the title of a link
+.tock - Return the time from the USNO Master Clock. 
+.u - Search for a particular Unicode codepoint. 
+.u — Search for a unicode character
+.val - Validate using validator w 3 org. 
+.wa — Query Wolfram Alpha
+.weather - Show the weather at airport with the code. 
+.wik — Search for something on Wikipedia
+casca: "parlez-vous français"? — Translate a phrase
+casca: tell nick something — Send a message to nick
+
 ## Testing
 You will need the Python3 versions of `python-nose` and `python-mock`. To run
 the tests, simply run `nosetests3`.
 
 ## Authors
-* Sean B. Palmer, http://inamidst.com/sbp/
+* Sean B. Palmer, http://github.com/faxalter/casca/sbp/
 * mutantmonkey, http://mutantmonkey.in
+* FAXALTER, https://st.gabriel.st/

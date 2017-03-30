@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-bot.py - Phenny IRC Bot
+bot.py - Casca IRC Bot
 Copyright 2008, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://inamidst.com/casca/
+http://github.com/faxalter/casca/casca/
 """
 
 import sys, os, re, threading, imp
@@ -27,7 +27,7 @@ def decode(bytes):
         return bytes
     return text
 
-class Phenny(irc.Bot): 
+class Casca(irc.Bot): 
     def __init__(self, config): 
         args = (config.nick, config.name, config.channels, config.password)
         irc.Bot.__init__(self, *args)
@@ -158,7 +158,7 @@ class Phenny(irc.Bot):
                     bind(self, func.priority, regexp, func)
 
     def wrapped(self, origin, text, match): 
-        class PhennyWrapper(object): 
+        class CascaWrapper(object): 
             def __init__(self, casca): 
                 self.bot = casca
 
@@ -173,7 +173,7 @@ class Phenny(irc.Bot):
                     return lambda msg: self.bot.action(sender, msg)
                 return getattr(self.bot, attr)
 
-        return PhennyWrapper(self)
+        return CascaWrapper(self)
 
     def input(self, origin, text, bytes, match, event, args):
         class CommandInput(str): 

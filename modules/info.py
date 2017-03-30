@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 """
-info.py - Phenny Information Module
+info.py - Casca Information Module
 Copyright 2008, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://inamidst.com/casca/
+http://github.com/faxalter/casca/casca/
 """
 
 

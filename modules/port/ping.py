@@ -6,7 +6,7 @@ Copyright 2008-2013, Sean B. Palmer (inamidst.com)
 
 More info:
  * casca: https://github.com/myano/casca/
- * Phenny: http://inamidst.com/casca/
+ * Casca: http://github.com/faxalter/casca/casca/
 """
 
 import random

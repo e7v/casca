@@ -5,7 +5,7 @@ proxy.py - Web Facilities
 More info:
  * Willie: https://willie.dftba.net
  * casca: https://github.com/myano/casca/
- * Phenny: http://inamidst.com/casca/
+ * Casca: http://github.com/faxalter/casca/casca/
 """
 
 import json

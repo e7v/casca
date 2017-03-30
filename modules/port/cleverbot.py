@@ -7,7 +7,7 @@ Licensed under the Eiffel Forum License 2.
 
 More info:
  * casca: https://github.com/myano/casca/
- * Phenny: http://inamidst.com/casca/
+ * Casca: http://github.com/faxalter/casca/casca/
  * https://github.com/folz/cleverbot.py
 
 This library lets you open chat session with cleverbot (www.cleverbot.com)

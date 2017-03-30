@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-__init__.py - Phenny Init Module
+__init__.py - Casca Init Module
 Copyright 2008, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://inamidst.com/casca/
+http://github.com/faxalter/casca/casca/
 """
 
 import sys, os, time, threading, signal
@@ -38,7 +38,7 @@ def run_casca(config):
 
     def connect(config): 
         import bot
-        p = bot.Phenny(config)
+        p = bot.Casca(config)
         p.run(config.host, config.port, config.ssl, config.ipv6,
               config.ca_certs)
 

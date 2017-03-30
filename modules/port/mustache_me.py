@@ -9,7 +9,7 @@ Developed by kaneda (https://josh.myhugesite.com / https://github.com/kaneda)
 
 More info:
  * casca: https://github.com/myano/casca/
- * Phenny: http://inamidst.com/casca/
+ * Casca: http://github.com/faxalter/casca/casca/
 """
 
 try:

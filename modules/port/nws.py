@@ -5,7 +5,7 @@ Copyright 2011-2013, Michael Yanovich (yanovich.net)
 
 More info:
  * casca: https://github.com/myano/casca/
- * Phenny: http://inamidst.com/casca/
+ * Casca: http://github.com/faxalter/casca/casca/
 
 This module allows one to query the National Weather Service for active
 watches, warnings, and advisories that are present.

@@ -9,7 +9,7 @@ Licensed under the Eiffel Forum License 2.
 More info:
  * casca-misc: https://github.com/freeboson/casca-misc/
  * casca: https://github.com/myano/casca/
- * Phenny: http://inamidst.com/casca/
+ * Casca: http://github.com/faxalter/casca/casca/
 '''
 
 import re

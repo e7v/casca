@@ -32,7 +32,7 @@ class BotTest(unittest.TestCase):
     @patch('asynchat.async_chat')
     def setUp(self, mock_async, mock_thread):
         self.nick = 'foo'
-        self.name = 'Phenny'
+        self.name = 'Casca'
         self.bot = irc.Bot(self.nick, self.name, '#casca')
 
     @patch('irc.Bot.write')

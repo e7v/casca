@@ -6,7 +6,7 @@ Copyright 2010-2013, Michael Yanovich (yanovich.net) and Matt Meinwald,
 
 More info:
  * casca: https://github.com/myano/casca/
- * Phenny: http://inamidst.com/casca/
+ * Casca: http://github.com/faxalter/casca/casca/
 """
 
 import codecs

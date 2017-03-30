@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 """
-remind.py - Phenny Reminder Module
+remind.py - Casca Reminder Module
 Copyright 2011, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://inamidst.com/casca/
+http://github.com/faxalter/casca/casca/
 """
 
 import os, re, time, threading

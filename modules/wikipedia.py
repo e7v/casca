@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 """
-wikipedia.py - Phenny Wikipedia Module
+wikipedia.py - Casca Wikipedia Module
 Copyright 2008-9, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://inamidst.com/casca/
+http://github.com/faxalter/casca/casca/
 """
 
 import re

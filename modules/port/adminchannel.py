@@ -6,7 +6,7 @@ Licensed under the Eiffel Forum License 2.
 
 More info:
  * casca: https://github.com/myano/casca/
- * Phenny: http://inamidst.com/casca/
+ * Casca: http://github.com/faxalter/casca/casca/
 
 Beefed up by Alek Rollyson, Josh Begleiter.
 * Added functions for op, deop, voice, devoice

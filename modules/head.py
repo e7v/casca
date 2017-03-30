@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 """
-head.py - Phenny HTTP Metadata Utilities
+head.py - Casca HTTP Metadata Utilities
 Copyright 2008, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://inamidst.com/casca/
+http://github.com/faxalter/casca/casca/
 """
 
 import re

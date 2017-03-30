@@ -8,12 +8,12 @@ import bot
 
 
 class BotTest(unittest.TestCase):
-    @patch('bot.Phenny.setup')
+    @patch('bot.Casca.setup')
     def setUp(self, mock_setup):
         class MockConfig(object):
             nick = 'casca'
             password = 'nickserv_pass'
-            name = 'Phenny'
+            name = 'Casca'
             host = 'irc.example.com'
             port = 6667
             ssl = False
@@ -23,7 +23,7 @@ class BotTest(unittest.TestCase):
             admins = [owner, 'casca_admin']
             prefix = '.'
 
-        self.bot = bot.Phenny(MockConfig)
+        self.bot = bot.Casca(MockConfig)
 
     def test_input(self):
         class MockOrigin(object):

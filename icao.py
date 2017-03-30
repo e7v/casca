@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-icao.py - Phenny ICAO Codes Data
+icao.py - Casca ICAO Codes Data
 This data and module are in the public domain.
 
-http://inamidst.com/casca/
+http://github.com/faxalter/casca/casca/
 """
 
 data = (

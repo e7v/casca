@@ -5,7 +5,7 @@ by afuhrtrumpet
 
 More info:
  * casca: https://github.com/myano/casca/
- * Phenny: http://inamidst.com/casca/
+ * Casca: http://github.com/faxalter/casca/casca/
 """
 
 from yelpapi import YelpAPI

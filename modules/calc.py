@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # coding=utf-8
 """
-calc.py - Phenny Calculator Module
+calc.py - Casca Calculator Module
 Copyright 2008, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://inamidst.com/casca/
+http://github.com/faxalter/casca/casca/
 """
 
 import re
