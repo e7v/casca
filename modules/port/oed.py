@@ -7,7 +7,7 @@ Licensed under the Eiffel Forum License 2.
 More info:
  * casca-misc: https://github.com/freeboson/casca-misc/
  * casca: https://github.com/myano/casca/
- * Casca: http://github.com/faxalter/casca/casca/
+ * Casca: http://github.com/faxalter/casca/
 
 NOTE: if your bot is not run on an IP that has access to OED, you should disable
 this module. (todo: add support for ezproxy library login)

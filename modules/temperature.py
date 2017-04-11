@@ -14,5 +14,5 @@ def temp(casca, input):
 	result = result.replace('       ',' ')
 	casca.say(result)
 
-temp.commands = ['temp']
-temp.example = '.temp'
+temp.commands = ['temperature']
+temp.example = '.temperature'

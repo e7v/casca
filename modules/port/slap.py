@@ -5,7 +5,7 @@ Copyright 2009-2013, Michael Yanovich (yanovich.net)
 
 More info:
  * casca: https://github.com/myano/casca/
- * Casca: http://github.com/faxalter/casca/casca/
+ * Casca: http://github.com/faxalter/casca/
 """
 
 import random

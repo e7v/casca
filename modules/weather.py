@@ -8,7 +8,7 @@ Licensed under the Eiffel Forum License 2.
 
 More info:
  * casca: https://github.com/myano/casca/
- * Casca: http://github.com/faxalter/casca/casca/
+ * Phenny: http://inamidst.com/casca/
 """
 
 import datetime
@@ -18,7 +18,7 @@ import urllib
 import web
 from tools import deprecated
 from icao import data
-
+import urllib.parse
 install_geopy = "Please install geopy via 'pip' to use weather.py"
 
 try:
@@ -31,14 +31,11 @@ r_from = re.compile(r'(?i)([+-]\d+):00 from')
 r_tag = re.compile(r'<(?!!)[^>]+>')
 
 class unicoder():
-    def encode (self, arg): 
-        text = arg
-        return text  
-    def decode (self, arg): 
-        text = str(arg)
-        return text
+    def encode (self, arg): return arg.encode('ascii', 'replace')        
+    def decode (self, arg): return arg.decode("utf-8", "ignore")
+
 uc = unicoder()       
-    
+
 def clean(txt, delim=''):
     '''Remove HTML entities from a given text'''
     if delim:
@@ -113,7 +110,7 @@ def get_metar(icao_code):
     uri = 'http://tgftp.nws.noaa.gov/data/observations/metar/stations/%s.TXT'
 
     page = web.get(uri % icao_code)
-    
+
     if 'Not Found' in page:
         return False, icao_code + ': no such ICAO code, or no NOAA data.'
 
@@ -191,6 +188,25 @@ def speed_desc(speed):
 
 def wind_dir(degrees):
     '''Provide a nice little unicode character of the wind direction'''
+    if degrees == 'VRB':
+        degrees = '\u21BB'
+    elif (degrees <= 22.5) or (degrees > 337.5):
+        degrees = '\u2191'
+    elif (degrees > 22.5) and (degrees <= 67.5):
+        degrees = '\u2197'
+    elif (degrees > 67.5) and (degrees <= 112.5):
+        degrees = '\u2192'
+    elif (degrees > 112.5) and (degrees <= 157.5):
+        degrees = '\u2198'
+    elif (degrees > 157.5) and (degrees <= 202.5):
+        degrees = '\u2193'
+    elif (degrees > 202.5) and (degrees <= 247.5):
+        degrees = '\u2199'
+    elif (degrees > 247.5) and (degrees <= 292.5):
+        degrees = '\u2190'
+    elif (degrees > 292.5) and (degrees <= 337.5):
+        degrees = '\u2196'
+
     return degrees
 
 
@@ -364,14 +380,13 @@ def f_weather(casca, input):
                     level = 0
 
         if level == 8:
-            #cover = u'Overcast \u2601'.encode('utf-8')
-            cover = u'Overcast \u2601'
+            cover = u'Overcast \u2601'.encode('utf-8')
         elif level == 5:
             cover = 'Cloudy'
         elif level == 3:
             cover = 'Scattered'
         elif (level == 1) or (level == 0):
-            cover = 'Clear'
+            cover = u'Clear \u263C'.encode('utf-8')
         else: cover = 'Cover Unknown'
     else: cover = 'Cover Unknown'
 
@@ -409,10 +424,10 @@ def f_weather(casca, input):
 
         if icao_code.startswith('K'):
             ## if in North America
-            windchill = u'%.1f\u00B0F (%.1f\u00B0C)' % (f, windchill)
+            windchill = u'%.1f\u00B0F (%.1f\u00B0C)'.encode('utf-8') % (f, windchill)
         else:
             ## else, anywhere else in the worldd
-            windchill = u'%.1f\u00B0C' % (windchill)
+            windchill = u'%.1f\u00B0C'.encode('utf-8') % (windchill)
 
     heatindex = False
     if isinstance(temp, float) and isinstance(dew, float):
@@ -420,7 +435,7 @@ def f_weather(casca, input):
         temp_f = (temp * 1.8) + 32.0
         if rh >= 40.0 and temp_f >= 80.0:
             heatindex = gen_heat_index(temp_f, rh)
-            heatindex = u'%.1f\u00B0F (%.1f\u00B0C)' % (heatindex, (heatindex - 32.0) / (1.8) )
+            heatindex = u'%.1f\u00B0F (%.1f\u00B0C)'.encode('utf-8') % (heatindex, (heatindex - 32.0) / (1.8) )
 
     if pressure:
         if pressure.startswith('Q'):
@@ -438,16 +453,16 @@ def f_weather(casca, input):
 
             if isinstance(temp, float):
                 f = (temp * 1.8) + 32
-                temp = u'%.1f\u00B0F (%.1f\u00B0C)'% (f, temp)
+                temp = u'%.1f\u00B0F (%.1f\u00B0C)'.encode('utf-8') % (f, temp)
             if isinstance(dew, float):
                 f = (dew * 1.8) + 32
-                dew = u'%.1f\u00B0F (%.1f\u00B0C)'% (f, dew)
+                dew = u'%.1f\u00B0F (%.1f\u00B0C)'.encode('utf-8') % (f, dew)
     else: pressure = '?mb'
 
     if isinstance(temp, float):
-        temp = u'%.1f\u00B0C'% temp
+        temp = u'%.1f\u00B0C'.encode('utf-8') % temp
     if isinstance(dew, float):
-        dew = u'%.1f\u00B0C'% dew
+        dew = u'%.1f\u00B0C'.encode('utf-8') % dew
 
     if cond:
         conds = cond
@@ -810,13 +825,13 @@ def forecastio_current_weather(casca, input):
         cover_word = 'Clear'
 
     temp_c = (temp - 32) / 1.8
-    temp = u'%.1f\u00B0F (%.1f\u00B0C)'% (temp, temp_c)
+    temp = '%.1f\u00B0F (%.1f\u00B0C)' % (temp, temp_c)
 
     dew_c = (dew - 32) / 1.8
-    dew = u'%.1f\u00B0F (%.1f\u00B0C)'% (dew, dew_c)
+    dew = '%.1f\u00B0F (%.1f\u00B0C)' % (dew, dew_c)
 
     APtemp_c = (APtemp - 32) / 1.8
-    APtemp = u'%.1f\u00B0F (%.1f\u00B0C)'% (APtemp, APtemp_c)
+    APtemp = '%.1f\u00B0F (%.1f\u00B0C)' % (APtemp, APtemp_c)
 
     humidity = str(int(float(humidity) * 100)) + '%'
 
@@ -839,22 +854,20 @@ def forecastio_current_weather(casca, input):
     ## a bit messy, but better than other alternatives
     output = str()
     output += '\x1FCover\x1F: ' + cover_word
-    output += ', \x1FTemp\x1F: ' + uc.decode(temp)
-    output += ', \x1FDew Point\x1F: ' + uc.decode(dew)
-    output += ', \x1FHumidity\x1F: ' + uc.decode(humidity)
-    output += ', \x1FApparent Temp\x1F: ' + uc.decode(APtemp)
-    output += ', \x1FPressure\x1F: ' + uc.decode(pressure)
-    
+    output += ', \x1FTemp\x1F: ' + str(temp)
+    output += ', \x1FDew Point\x1F: ' + str(dew)
+    output += ', \x1FHumidity\x1F: ' + str(humidity)
+    output += ', \x1FApparent Temp\x1F: ' + str(APtemp)
+    output += ', \x1FPressure\x1F: ' + pressure
     if cond:
-        output += ', \x1FCondition\x1F: ' + uc.decode(cond)
-
+        output += ', \x1FCondition\x1F: ' + (str(cond)) #(cond).encode('utf-8')
     output += ', \x1FWind\x1F: ' + wind
     output += ' - '
-    output += uc.decode(name)
+    output += str(name)
     output + '; %s UTC' % (time)
 
     ## required according to ToS by darksky.net
-    #output += ' (Powered by Dark Sky, darksky.net)'
+    output += ' (Powered by Dark Sky, darksky.net)'
     casca.say(output)
 forecastio_current_weather.commands = ['wxi-ft', 'wx-ft', 'weather-ft', 'weather', 'wx']
 forecastio_current_weather.rate = 5

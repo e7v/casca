@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 wikiquote.py - casca Random Quote Module
 Copyright 2009-2013, Michael Yanovich (yanovich.net)
@@ -9,7 +9,7 @@ Developed by kaneda (https://jbegleiter.com / https://github.com/kaneda)
 
 More info:
  * casca: https://github.com/myano/casca/
- * Casca: http://github.com/faxalter/casca/casca/
+ * Casca: http://github.com/faxalter/casca/
 """
 
 import json
@@ -22,7 +22,7 @@ except ImportError:
     raise ImportError("Could not find BeautifulSoup library,"
                       "please install to use the wikiquote module")
 
-USER_AGENT = "JenniBot/1.0 (https://github.com/myano/casca) JenniBot/1.0"
+USER_AGENT = "Casca/1.0 (https://github.com/faxalter/casca) Casca/1.0"
 
 class JenniURLopener(urllib.FancyURLopener):
     version = USER_AGENT
@@ -178,4 +178,4 @@ list_cats.commands = ['list_quote_cats', 'list_wikiquote_cats', 'ls_wq_cats']
 list_cats.priority = 'low'
 
 if __name__ == '__main__':
-    print __doc__.strip()
+    print(__doc__.strip())

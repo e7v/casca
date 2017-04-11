@@ -4,7 +4,7 @@ imdb.py - Casca Web Search Module
 Copyright 2012, Randy Nance, randynance.info 
 Licensed under the Eiffel Forum License 2.
 
-http://github.com/faxalter/casca/casca/
+http://github.com/faxalter/casca/
 """
 
 import re

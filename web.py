@@ -2,7 +2,7 @@
 """
 web.py - Web Facilities
 Author: Sean B. Palmer, inamidst.com
-About: http://github.com/faxalter/casca/casca/
+About: http://github.com/faxalter/casca/
 """
 
 import re

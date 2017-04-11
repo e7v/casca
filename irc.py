@@ -4,7 +4,7 @@ irc.py - A Utility IRC Bot
 Copyright 2008, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://github.com/faxalter/casca/casca/
+http://github.com/faxalter/casca/
 """
 
 import sys, re, time, traceback
@@ -109,7 +109,7 @@ class Bot(asynchat.async_chat):
         if use_ssl:
             # this stuff is all new in python 3.4, so fallback if needed
             try:
-                context = ssl.create_default_context(
+                context = ssl._create_unverified_context(
                     purpose=ssl.Purpose.SERVER_AUTH,
                     cafile=self.ca_certs)
                 sock = context.wrap_socket(sock, server_hostname=hostname)
@@ -130,6 +130,8 @@ class Bot(asynchat.async_chat):
             print('connected!', file=sys.stderr)
         if self.password: 
             self.write(('PASS', self.password))
+        #if self.serverpass:
+        #    self.write(('PASS', self.serverpass))
         self.write(('NICK', self.nick))
         self.write(('USER', self.user, '+iw', self.nick), self.name)
 
@@ -139,6 +141,7 @@ class Bot(asynchat.async_chat):
 
     def collect_incoming_data(self, data): 
         self.buffer += data
+        print(data) #motherfucking VERBOSE mode
 
     def found_terminator(self): 
         line = self.buffer

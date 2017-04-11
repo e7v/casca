@@ -2,7 +2,7 @@
 """
 ping.py - Casca Ping Module
 Author: Sean B. Palmer, inamidst.com
-About: http://github.com/faxalter/casca/casca/
+About: http://github.com/faxalter/casca/
 """
 
 import random

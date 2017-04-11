@@ -7,7 +7,7 @@ Licensed under the Eiffel Forum License 2.
 More info:
  * casca-misc: https://github.com/freeboson/casca-misc/
  * casca: https://github.com/myano/casca/
- * Casca: http://github.com/faxalter/casca/casca/
+ * Casca: http://github.com/faxalter/casca/
 '''
 
 import web, re, feedparser

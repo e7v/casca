@@ -6,7 +6,7 @@ Licensed under the Eiffel Forum License 2.
 
 More info:
  * casca: https://github.com/myano/casca/
- * Casca: http://github.com/faxalter/casca/casca/
+ * Casca: http://github.com/faxalter/casca/
 '''
 
 def motivate(casca, input):

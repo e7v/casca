@@ -9,7 +9,7 @@ Licensed under the Eiffel Forum License 2.
 More info:
  * Willie: http://willie.dftba.net
  * casca: https://github.com/myano/casca/
- * Casca: http://github.com/faxalter/casca/casca/
+ * Casca: http://github.com/faxalter/casca/
 
 This module has been imported from Willie.
 """

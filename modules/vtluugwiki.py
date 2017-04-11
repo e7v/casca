@@ -4,7 +4,7 @@ vtluugwiki.py - Casca VTLUUG Wiki Module
 Copyright 2008-9, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://github.com/faxalter/casca/casca/
+http://github.com/faxalter/casca/
 
 modified from Wikipedia module
 author: mutantmonkey <mutantmonkey@mutantmonkey.in>

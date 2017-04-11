@@ -4,7 +4,7 @@ startup.py - Casca Startup Module
 Copyright 2008, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://github.com/faxalter/casca/casca/
+http://github.com/faxalter/casca/
 """
 
 import threading, time

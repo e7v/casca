@@ -9,7 +9,7 @@ Developed by kaneda (http://jbegleiter.com / https://github.com/kaneda)
 
 More info:
  * casca: https://github.com/myano/casca/
- * Casca: http://github.com/faxalter/casca/casca/
+ * Casca: http://github.com/faxalter/casca/
 """
 
 import json

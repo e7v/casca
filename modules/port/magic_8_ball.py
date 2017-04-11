@@ -10,7 +10,7 @@ the same question will always have the same answer on a given day.
 
 More info:
  * casca: https://github.com/myano/casca/
- * Casca: http://github.com/faxalter/casca/casca/
+ * Casca: http://github.com/faxalter/casca/
 '''
 
 import random

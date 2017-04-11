@@ -10,7 +10,7 @@ This allows users to check if a website is up through isup.me.
 More info:
  * Willie: http://willie.dftba.net/
  * casca: https://github.com/myano/casca/
- * Casca: http://github.com/faxalter/casca/casca/
+ * Casca: http://github.com/faxalter/casca/
 """
 
 from modules import proxy

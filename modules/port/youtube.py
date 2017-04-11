@@ -14,7 +14,7 @@ Copyright 2012, Edward Powell, embolalia.net
 More info:
  * casca-misc: https://github.com/freeboson/casca-misc/
  * casca: https://github.com/myano/casca/
- * Casca: http://github.com/faxalter/casca/casca/
+ * Casca: http://github.com/faxalter/casca/
 '''
 
 import json
