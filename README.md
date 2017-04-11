@@ -24,31 +24,59 @@ Enjoy!
 
 
 .beats - Returns the current internet time 
+
 .bytes - Return the byte representation of . 
+
 .c — Query Google calculator.
+
 .calc - Return the Frink calc for. 
+
 .char - Get info about a sequence. 
+
 .choose <red> <blue> - for when you just can't decide.
+
 .dict - Returns the definition of. 
+
 .ety — Look up the etymology of a word
+
 .g - Google for and return the top result. 
+
 .gc — Get the number of results on Google
+
 .head - Perform an HTTP HEAD on URI. 
+
 .in — Set a reminder
+
 .py — Evaluate an expression in python
+
 .seen - Reports when was last seen. 
+
+.stocks <SYMBOL> - Return current stock information.
+
 .t [ ] - Returns the current time 
+
 .t — Return the current time
+
 .tell - I'll remind nick about blargh. 
+
 .title — Get the title of a link
+
 .tock - Return the time from the USNO Master Clock. 
+
 .u - Search for a particular Unicode codepoint. 
+
 .u — Search for a unicode character
+
 .val - Validate using validator w 3 org. 
+
 .wa — Query Wolfram Alpha
+
 .weather - Show the weather at airport with the code. 
+
 .wik — Search for something on Wikipedia
+
 casca: "parlez-vous français"? — Translate a phrase
+
 casca: tell nick something — Send a message to nick
 
 ## Testing
