@@ -2,7 +2,7 @@
 """
 stocks.py - Look up stocks (powered by Robinhood)
 
-by FAXALTER
+by e7v (https://github.com/e7v)
 """
 
 import urllib.request, json

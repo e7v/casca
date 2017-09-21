@@ -4,7 +4,7 @@ info.py - Casca Information Module
 Copyright 2008, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://github.com/faxalter/casca/
+http://github.com/e7v/casca/
 """
 
 
@@ -15,7 +15,7 @@ def help(casca, input):
     if hasattr(casca.config, 'helpurl'):
         helpurl = casca.config.helpurl
     else:
-        helpurl = "https://vtluug.org/wiki/Wadsworth"
+        helpurl = "https://github.com/e7v/casca"
 
     if input.sender.startswith('#'):
         # channels get a brief message instead

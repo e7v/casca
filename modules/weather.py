@@ -32,7 +32,9 @@ r_tag = re.compile(r'<(?!!)[^>]+>')
 
 class unicoder():
     def encode (self, arg): return arg.encode('ascii', 'replace')        
-    def decode (self, arg): return arg.decode("utf-8", "ignore")
+    def decode (self, arg): 
+        try: return arg.decode("utf-8", "ignore")
+        except: pass
 
 uc = unicoder()       
 
@@ -758,7 +760,7 @@ def forecast(casca, input):
     ## required according to ToS by darksky.net
     second_output += ' (Powered by Dark Sky, darksky.net)'
     casca.say(second_output)
-forecast.commands = ['forecast', 'fct', 'fc']
+forecast.commands = ['fct', 'fc']
 forecast.rate = 5
 
 
@@ -853,15 +855,18 @@ def forecastio_current_weather(casca, input):
     ## build output string.
     ## a bit messy, but better than other alternatives
     output = str()
-    output += '\x1FCover\x1F: ' + cover_word
-    output += ', \x1FTemp\x1F: ' + str(temp)
-    output += ', \x1FDew Point\x1F: ' + str(dew)
-    output += ', \x1FHumidity\x1F: ' + str(humidity)
-    output += ', \x1FApparent Temp\x1F: ' + str(APtemp)
-    output += ', \x1FPressure\x1F: ' + pressure
+    #        highs = u'\x02\x0304%s\u00B0F (%s\u00B0C)\x03\x02' % (day['high']['fahrenheit'], day['high']['celsius'])
+    #    lows = u'\x02\x0302%s\u00B0F (%s\u00B0C)\x03\x02' % (day['low']['fahrenheit'], day['low']['celsius'])
+
+    output += u'\x02\x0310Cover\x03\x02: ' + cover_word
+    output += u', \x02\x0310Temp\x03\x02: \x02\x0304' + str(temp) + '\x03\x02'
+    output += u', \x02\x0310Dew Point\x03\x02: \x02\x0302' + str(dew) + '\x03\x02'
+    output += u', \x02\x0310Humidity\x03\x02: \x02\x0302' + str(humidity) + '\x03\x02'
+    output += u', \x02\x0310Apparent Temp\x03\x02: \x02\x0304' + str(APtemp) + '\x03\x02'
+    output += u', \x02\x0310Pressure\x03\x02: \x02\x0302' + pressure + '\x03\x02'
     if cond:
-        output += ', \x1FCondition\x1F: ' + (str(cond)) #(cond).encode('utf-8')
-    output += ', \x1FWind\x1F: ' + wind
+        output += ', \x02\x0310Condition\x03\x02: ' + (str(cond)) #(cond).encode('utf-8')
+    output += ', \x02\x0310Wind\x03\x02: \x02\x0302' + wind + '\x03\x02'
     output += ' - '
     output += str(name)
     output + '; %s UTC' % (time)
@@ -869,7 +874,7 @@ def forecastio_current_weather(casca, input):
     ## required according to ToS by darksky.net
     output += ' (Powered by Dark Sky, darksky.net)'
     casca.say(output)
-forecastio_current_weather.commands = ['wxi-ft', 'wx-ft', 'weather-ft', 'weather', 'wx']
+forecastio_current_weather.commands = ['wxi-ft', 'wx-ft', 'weather-ft', 'wx']
 forecastio_current_weather.rate = 5
 
 
@@ -972,21 +977,21 @@ def weather_wunderground(casca, input):
     time_updated = re.sub('Last Updated on ', '\x1FLast Updated\x1F: ', time_updated)
 
     output = str()
-    output += '\x1FCover\x1F: ' + condition
-    output += ', \x1FTemp\x1F: ' + add_degree(temp)
-    output += ', \x1FDew Point\x1F: ' + add_degree(dewpoint)
-    output += ', \x1FHumdity\x1F: ' + rh
-    output += ', \x1FFeels Like\x1F: ' + add_degree(feelslike)
-    output += ', \x1FPressure\x1F: ' + '[%s] %sin (%smb)' % (pressure_trend, pressure_in, pressure_mb)
-    output += ', \x1FWind\x1F: ' + 'From the %s at %s mph (%s kmh)' % (wind_dir, wind_mph, wind_kph)
-    output += ', \x1FLocation\x1F: ' + (location).encode('utf-8').decode('utf-8')
+    output += '\x02\x0310\x1FCover\x1F\x03\x02: ' + condition
+    output += ', \x02\x0310\x1FTemp\x1F\x03\x02: \x02\x0304' + add_degree(temp) + '\x03\x02'
+    output += ', \x02\x0310\x1FDew Point\x1F\x03\x02: \x02\x0302' + add_degree(dewpoint) + '\x03\x02'
+    output += ', \x02\x0310\x1FHumdity\x1F\x03\x02: \x02\x0302: ' + rh + '\x03\x02'
+    output += ', \x02\x0310\x1FFeels Like\x1F\x03\x02: \x02\x0304: ' + add_degree(feelslike) + '\x03\x02'
+    output += ', \x02\x0310\x1FPressure\x1F: \x03\x02: \x02\x0302' + '[%s] %sin (%smb)' % (pressure_trend, pressure_in, pressure_mb) + '\x03\x02'
+    output += ', \x02\x0310\x1FWind\x1F\x03\x02: \x02\x0302 ' + 'From the %s at %s mph (%s kmh)' % (wind_dir, wind_mph, wind_kph) + '\x03\x02'
+    output += ', \x1FLocation\x1F\x03\x02: \x02\x0302 ' + (location).encode('utf-8').decode('utf-8') + '\x03\x02'
     output += ', ' + time_updated
 
     output += ', (Powered by wunderground.com)'
 
     casca.say(output)
 
-weather_wunderground.commands = ['wx-wg', 'weather-wg']
+weather_wunderground.commands = ['wx-wg', 'weather-wg', 'weather']
 weather_wunderground.rate = 10
 
 
@@ -1089,7 +1094,7 @@ def forecast_wg(casca, input):
     casca.say(output)
     casca.say(output_second)
 
-forecast_wg.commands = ['forecast-wg']
+forecast_wg.commands = ['forecast']
 forecast_wg.rate = 5
 
 

@@ -4,7 +4,7 @@ seen.py - Casca Seen Module
 Copyright 2008, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://github.com/faxalter/casca/
+http://github.com/e7v/casca/
 """
 
 import time, os, shelve, datetime

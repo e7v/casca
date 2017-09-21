@@ -4,7 +4,7 @@ rule34.py - rule 34 module
 author: mutantmonkey <mutantmonkey@mutantmonkey.in>
 """
 
-#from tools import GrumbleError
+from tools import GrumbleError
 import web
 import lxml.html
 
@@ -19,7 +19,7 @@ def rule34(casca, input):
     try:
         req = web.get("http://rule34.xxx/index.php?page=post&s=list&tags={0}".format(web.quote(q)))
     except:
-        pass #raise GrumbleError("THE INTERNET IS FUCKING BROKEN. Please try again later.")
+        raise GrumbleError("THE INTERNET IS FUCKING BROKEN. Please try again later.")
 
     doc = lxml.html.fromstring(req)
     doc.make_links_absolute('http://rule34.xxx/')

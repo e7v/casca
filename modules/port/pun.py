@@ -7,7 +7,7 @@ Copyright 2015, Jonathan Arnett (j3rn.com)
 
 More info:
  * casca: https://github.com/myano/casca/
- * Casca: http://github.com/faxalter/casca/
+ * Casca: http://github.com/e7v/casca/
 """
 
 import re

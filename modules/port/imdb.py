@@ -9,7 +9,7 @@ This module relies on omdbapi.com
 
 More info:
  * casca: https://github.com/myano/casca/
- * Casca: http://github.com/faxalter/casca/
+ * Casca: http://github.com/e7v/casca/
 '''
 
 from modules import proxy

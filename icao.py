@@ -3,7 +3,7 @@
 icao.py - Casca ICAO Codes Data
 This data and module are in the public domain.
 
-http://github.com/faxalter/casca/
+http://github.com/e7v/casca/
 """
 
 data = (

@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+import urllib
+import pickle
+from bs4 import BeautifulSoup
+db = False
+dblocation = '/var/www/casca/securitytracker.db'
+
+
+def loadDatabase():
+	global db
+	try:
+		with open(dblocation, 'rb') as f:
+			db = pickle.load(f)
+	except:
+		print('error loading bookmarks.db')
+	return db
+
+def saveDatabase(anchortext=''):
+	with open(dblocation, 'wb') as f:
+		pickle.dump(anchortext, f)
+
+def html():
+	location = 'http://securitytracker.com/archives/summary/9000.html'
+	request = urllib.request.Request(location)
+	request.add_header('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:5.0)')
+	html5 = urllib.request.urlopen(location).read()
+	html5 = BeautifulSoup(html5, "html5lib")
+	return html5
+
+	
+def latest():
+	global db
+	html5 = html()
+	url = 'http://securitytracker.com'+html5.findAll('a')[9].attrs['href']
+	anchortext = html5.findAll('a')[9].text
+	if anchortext == loadDatabase(): print('same!')
+	else:
+		print(anchortext)	
+		saveDatabase(anchortext)
+	return {'url' : url, 'text' : anchortext}
+
+
+if __name__ == '__main__':
+	latest()

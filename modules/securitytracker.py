@@ -9,7 +9,7 @@ from time import sleep
 from bs4 import BeautifulSoup
 db = False
 dblocation = '/var/www/casca/securitytracker.db'
-
+announcing = False
 
 
 def loadDatabase():
@@ -66,34 +66,36 @@ securitytracker.example = '.securitytracker'
 
 def last5(casca, input):
 	html5 = html()
+	
 	url = 'http://securitytracker.com'
-	casca.say(html5.findAll('a')[13].text + ' - ' + url + html5.findAll('a')[9].attrs['href'])
-	sleep(.7)
-	casca.say(html5.findAll('a')[12].text + ' - ' + url + html5.findAll('a')[9].attrs['href'])
-	sleep(.7)
-	casca.say(html5.findAll('a')[11].text + ' - ' + url + html5.findAll('a')[9].attrs['href'])
-	sleep(.7)
-	casca.say(html5.findAll('a')[10].text + ' - ' + url + html5.findAll('a')[9].attrs['href'])
-	sleep(.7)
-	casca.say(html5.findAll('a')[9].text + ' - ' + url + html5.findAll('a')[9].attrs['href'])
-last5.commands = ['securitytracker-last5']
-securitytracker.example = '.securitytracker-last5'
+	for i in range(9,20):
+		casca.say(html5.findAll('a')[i].text + ' - ' + url + html5.findAll('a')[i].attrs['href'])
+		sleep(1)
+	
+last5.commands = ['securitytracker-latest', 'last5', 'st-latest']
+securitytracker.example = '.securitytracker-latest'
 	
 def announcer(casca, input):
 	""".announce-securitytracker - Announce the latest bugs."""
-	answer = latest(onlyNew=False) # returns 'www.whatever.com' or 'False'
-
-	while True:
-		if answer:
-			print('new!')
-			casca.say(answer)
-			answer = latest(onlyNew=True)
-			print("answer should be reset: "+str(answer))
-			sleep(20)
-		else:
-			print('old! pass.')
-			answer = latest(onlyNew=True)
-			sleep(20)
-announcer.commands = ['announce-securitytracker']
-announcer.example = '.announce-securitytracker'
-
+	global announcing
+	if not announcing:
+		announcing = True
+		answer = latest(onlyNew=False) # returns 'www.whatever.com' or 'False'
+		while True:
+			if answer:
+				try:
+					casca.say(answer)	
+					answer = latest(onlyNew=True)
+					sleep(20)
+				except:
+					print('error1')
+			else:
+				try:
+					answer = latest(onlyNew=True)
+					sleep(20)
+				except:
+					print('error 2')
+	else:
+		casca.say('Running...')
+announcer.commands = ['announcer-securitytracker', 'securitytracker-announce', '!st', '!securitytracker']
+announcer.example = '.announcer-securitytracker'

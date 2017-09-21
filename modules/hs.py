@@ -4,7 +4,6 @@ hs.py - hokie stalker module
 author: mutantmonkey <mutantmonkey@mutantmonkey.in>
 """
 
-from tools import GrumbleError
 import web
 import lxml.etree
 
@@ -19,7 +18,7 @@ def search(query):
     try:
         r = web.get(SEARCH_URL.format(query), verify=False)
     except (web.ConnectionError, web.HTTPError):
-        raise GrumbleError("THE INTERNET IS FUCKING BROKEN. Please try again later.")
+        pass #raise GrumbleError("THE INTERNET IS FUCKING BROKEN. Please try again later.")
 
     # apparently the failure mode if you search for <3 characters is a blank
     # XML page...
@@ -60,6 +59,10 @@ def hs(casca, input):
     else:
         casca.reply("No results found")
 hs.rule = (['hs'], r'(.*)')
+#hs.commands = ['hs']
+hs.example = '.hs name'
+
+
 
 if __name__ == '__main__':
     print(__doc__.strip())

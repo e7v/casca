@@ -84,6 +84,6 @@ You will need the Python3 versions of `python-nose` and `python-mock`. To run
 the tests, simply run `nosetests3`.
 
 ## Authors
-* Sean B. Palmer, http://github.com/faxalter/casca/sbp/
+* Sean B. Palmer, http://github.com/e7v/casca/sbp/
 * mutantmonkey, http://mutantmonkey.in
 * FAXALTER, https://st.gabriel.st/

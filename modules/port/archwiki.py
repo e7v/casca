@@ -4,7 +4,7 @@ archwiki.py - casca ArchWiki Module
 Copyright 2008-9, Sean B. Palmer, inamidst.com
 Licensed under the Eiffel Forum License 2.
 
-http://github.com/faxalter/casca/
+http://github.com/e7v/casca/
 
 modified from Wikipedia module
 author: mutantmonkey <mutantmonkey@mutantmonkey.in>

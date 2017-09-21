@@ -6,7 +6,7 @@ Licensed under the Eiffel Forum License 2.
 
 More info:
  * casca: https://github.com/myano/casca/
- * Casca: http://github.com/faxalter/casca/
+ * Casca: http://github.com/e7v/casca/
 
 Contributions from: Matt Meinwald and Morgan Goose
 This module will fix spelling errors if someone corrects them

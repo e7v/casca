@@ -6,7 +6,7 @@ author: mutantmonkey <mutantmonkey@mutantmonkey.in>
 
 import random
 
-otherbot = "quone"
+otherbot = "ChanServ"
 
 def botfight(casca, input):
     """.botfight - Fight the other bot in the channel."""

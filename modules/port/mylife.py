@@ -5,7 +5,7 @@ author: Ramblurr <unnamedrambler@gmail.com>
 author: mutantmonkey <mutantmonkey@mutantmonkey.in>
 """
 
-#from tools import GrumbleError
+from tools import GrumbleError
 import web
 import lxml.html
 
@@ -14,8 +14,8 @@ def fml(casca, input):
     """.fml - Grab something from fmylife.com."""
     try:
         req = web.get("http://www.fmylife.com/random")
-    except:pass
-        #raise GrumbleError("I tried to use .fml, but it was broken. FML")
+    except:
+        raise GrumbleError("I tried to use .fml, but it was broken. FML")
 
     doc = lxml.html.fromstring(req)
     quote = doc.find_class('block')[1][0].text_content()
