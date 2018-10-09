@@ -23,9 +23,9 @@ Enjoy!
 ## Commands
 
 
+.bitcoin, .btc - Return current bitcoin stock information.
 
 .choose <red> <blue> - for when you just can't decide.
-
 
 .g - Google for and return the top result. 
 
@@ -38,8 +38,6 @@ Enjoy!
 .stocks <SYMBOL> - Return current stock information.
 
 .tock - Return the time from the USNO Master Clock. 
-
-.u - Search for a particular Unicode codepoint. 
 
 .u — Search for a unicode character
 
